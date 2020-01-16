@@ -1,7 +1,7 @@
 {
   "name": "acap-sdk",
   "version": "0.0.1",
-  "main": "dist/acap-sdk.js",
+  "main": "dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.js",
