@@ -1,0 +1,24 @@
+{
+  "name": "acap-sdk",
+  "version": "0.0.1",
+  "main": "dist/acap-sdk.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js",
+    "prepare": "webpack --config webpack.config.js"
+  },
+  "files": ["dist/**/*"],
+  "keywords": [],
+  "author": "Michael Sickles",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.4.1",
+    "jsrender": "^1.0.4"
+  },
+  "devDependencies": {
+    "html-loader": "^0.5.5",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "description": ""
+}
