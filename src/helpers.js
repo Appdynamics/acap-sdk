@@ -63,27 +63,10 @@ var generateRandomTimeData = function(max, intervals, bucket, xmin, xmax) {
   var animateDiv = function (div, animate) {
     $("#" + div).addClass("animated " + animate);
   };
+
   
-  var SI_PREFIXES = ["", "K", "M", "G", "T", "P", "E"];
-  
-  function abbreviateNumber(number) {
-    // what tier? (determines SI prefix)
-    var tier = (Math.log10(number) / 3) | 0;
-  
-    // if zero, we don't need a prefix
-    if (tier == 0) return number;
-  
-    // get prefix and determine scale
-    var prefix = SI_PREFIXES[tier];
-    var scale = Math.pow(10, tier * 3);
-  
-    // scale the number
-    var scaled = number / scale;
-  
-    // format number and add prefix as suffix
-    return scaled.toFixed(1) + prefix;
-  }
-  
+var _debugBiQAppCharts = false;
+
   function debug(comp, message) {
     if (_debugBiQAppCharts) {
       try {
@@ -137,4 +120,54 @@ var biqUpdateQuery = function (options, query, filters) {
         }
     }
 }
-export { biqUpdateQuery, debug, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  }
+
+var SI_PREFIXES = ["", "K", "M", "G", "T", "P", "E"];
+
+function abbreviateNumber(number) {
+  // what tier? (determines SI prefix)
+  var tier = (Math.log10(number) / 3) | 0;
+
+  // if zero, we don't need a prefix
+  if (tier == 0) return number;
+
+  // get prefix and determine scale
+  var prefix = SI_PREFIXES[tier];
+  var scale = Math.pow(10, tier * 3);
+
+  // scale the number
+  var scaled = number / scale;
+
+  // format number and add prefix as suffix
+  return scaled.toFixed(1) + prefix;
+}
+
+
+
+
+
+
+
+var hideElements = function (elems) {
+  if (elems) {
+    elems.forEach(function (elem) {
+      $("#" + elem).hide();
+    });
+  }
+};
+
+var showElements = function (elems) {
+  if (elems) {
+    elems.forEach(function (elem) {
+      $("#" + elem).show();
+    });
+  }
+}
+
+
+var roundValue = function(value){
+  return Math.round(value * 10) / 10;
+}
+
+
+
+export {  roundValue, hideElements, showElements, biqUpdateQuery, debug, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  }

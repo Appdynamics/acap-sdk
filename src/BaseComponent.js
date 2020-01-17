@@ -1,9 +1,10 @@
 import CoreComponent from './CoreComponent';
 import { biqUpdateQuery, debug, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  } from './helpers';
 import $ from 'jquery';
+import _chartComponentTemplate from './chartComponentTemplate.html';
 require('jsrender')($);
 
-class BaseComponent extends CoreComponent {
+export default class BaseComponent extends CoreComponent {
     constructor(options, chart) {
         super(options)
         this.chart = chart;
@@ -185,4 +186,3 @@ class BaseComponent extends CoreComponent {
         }
     }
 }
-export { BaseComponent }

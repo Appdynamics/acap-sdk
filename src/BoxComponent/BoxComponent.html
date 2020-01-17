@@ -1,0 +1,16 @@
+<div id="{{:targetId}}-box" class="{{:cardStyle}} rounded {{:panelClass}}" onClick="{{:actionClick}}"
+    style="cursor: pointer;">
+    <div class="card-body">
+        <h2 class="card-title">
+            <div class="icon">
+                <i class="{{:icon}}" {{if iconColor}} style="color:{{:iconColor}}" {{/if}}></i> {{:value}}
+            </div>
+        </h2>
+        <p class="card-text">{{:title}}</p>
+        {{if hasChart}}
+        <div class="overview-chart">
+            <div id="{{:targetId}}-chart"></div>
+        </div>
+        {{/if}}
+    </div>
+</div>

@@ -1,8 +1,8 @@
-import { BaseComponent } from '../BaseComponent';
+import  BaseComponent  from '../BaseComponent';
 import  template from './CustomComponent.html';
 
 
-class CustomComponent extends BaseComponent {
+export default class CustomComponent extends BaseComponent {
     constructor(options) {
       options.hasChart = false;
       if (!options.template) {
@@ -12,4 +12,4 @@ class CustomComponent extends BaseComponent {
     }
 
 }
-export { CustomComponent }
+
