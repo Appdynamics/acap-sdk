@@ -1,9 +1,9 @@
 
 import BaseComponent  from '../BaseComponent';
 import BaseChart from '../BaseChart';
-import { debug } from '../helpers';
+import { debug, generateColumnData } from '../helpers';
 import _chartComponentTemplate from '../chartComponentTemplate.html';
-export default class DonutChartComponent extends BaseComponent {
+class DonutChartComponent extends BaseComponent {
     constructor(options) {
       if (!options.template) {
         options.template = _chartComponentTemplate;
@@ -47,3 +47,5 @@ class DonutChart extends BaseChart {
       super.animate();
     }
   }
+
+  export { DonutChart, DonutChartComponent}

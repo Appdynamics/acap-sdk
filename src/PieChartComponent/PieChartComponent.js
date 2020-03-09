@@ -1,8 +1,8 @@
 import BaseComponent  from '../BaseComponent';
 import BaseChart from '../BaseChart';
-import { debug } from '../helpers';
+import { debug, generateColumnData } from '../helpers';
 import _chartComponentTemplate from '../chartComponentTemplate.html';
-export default class PieChartComponent extends BaseComponent {
+class PieChartComponent extends BaseComponent {
     constructor(options) {
         options.template = _chartComponentTemplate;
         super(options, new PieChart(options));
@@ -47,3 +47,4 @@ class PieChart extends BaseChart {
         super.animate();
     }
 }
+export { PieChart, PieChartComponent }

@@ -65,7 +65,7 @@ var generateRandomTimeData = function(max, intervals, bucket, xmin, xmax) {
   };
 
   
-var _debugBiQAppCharts = false;
+var _debugBiQAppCharts = true;
 
   function debug(comp, message) {
     if (_debugBiQAppCharts) {

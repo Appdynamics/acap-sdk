@@ -13,7 +13,12 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.(html)$/, use: 'html-loader'}
+            { test: /\.(html)$/, use: 'html-loader'},
+            {
+                test: /\.(png|jpg)$/,
+                loader: 'url-loader'
+              },
+            { test: /\.(css)$/, use: ['style-loader', 'css-loader'] }
         ]
     },
     plugins: [

@@ -1,9 +1,12 @@
 import BaseComponent  from '../BaseComponent';
 import BaseChart from '../BaseChart';
-export default class TableComponent extends BaseComponent {
+import { generateColumnData } from '../helpers';
+import template from './TableComponent.html';
+import tabletemplate from './Table.html';
+ class TableComponent extends BaseComponent {
     constructor(options) {
       if (!options.template) {
-        options.template = _tableComponentTemplate;
+        options.template = template;
       }
       super(options, new Table(options));
     }
@@ -20,7 +23,7 @@ export default class TableComponent extends BaseComponent {
 class Table extends BaseChart {
     constructor(options) {
       if (!options.template) {
-        options.template = _tableTemplate;
+        options.template = tabletemplate;
       }
       super(options);
       this.order = options.order;
@@ -80,3 +83,5 @@ class Table extends BaseChart {
       super.animate();
     }
   }
+
+  export { Table, TableComponent}
