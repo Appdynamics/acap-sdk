@@ -1,6 +1,6 @@
 import BaseComponent  from '../BaseComponent';
 import template from './BoxComponent.html';
-import $ from 'jquery';
+
 export default class BoxComponent extends BaseComponent {
     constructor(options) {
       if (!options.action) {

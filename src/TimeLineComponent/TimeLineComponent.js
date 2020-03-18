@@ -1,5 +1,7 @@
 import BaseChart from '../BaseChart';
-export default class TimeLineChart extends BaseChart {
+import bb from 'billboard.js';
+
+export default class TimeLineComponent extends BaseChart {
     constructor(options) {
       options.div = options.targetId;
       super(options);

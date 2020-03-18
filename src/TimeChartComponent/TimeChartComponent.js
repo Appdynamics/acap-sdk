@@ -3,6 +3,7 @@ import BaseChart from '../BaseChart';
 import BaseComponent  from '../BaseComponent';
 import { debug } from '../helpers';
 import _chartComponentTemplate from '../chartComponentTemplate.html';
+import bb from 'billboard.js';
 class TimeChart extends BaseChart {
     constructor(options) {
         super(options);

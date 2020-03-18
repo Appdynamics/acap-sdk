@@ -15,7 +15,7 @@ module.exports = {
         rules: [
             { test: /\.(html)$/, use: 'html-loader'},
             {
-                test: /\.(png|jpg)$/,
+                test: /\.(png|jpg|svg|eot|woff|woff2|ttf)$/,
                 loader: 'url-loader'
               },
             { test: /\.(css)$/, use: ['style-loader', 'css-loader'] }
@@ -24,7 +24,8 @@ module.exports = {
     plugins: [
         new webpack.ProvidePlugin({
             $: 'jquery',
-            jQuery: 'jquery'
+            jQuery: 'jquery',
+            bb:'bb'
         })
     ]
     

@@ -1,4 +1,5 @@
 import { TimeChart } from '../TimeChartComponent/TimeChartComponent';
+import bb from 'billboard.js';
 export default class SparkLineChart extends TimeChart {
     constructor(options) {
       super(options);

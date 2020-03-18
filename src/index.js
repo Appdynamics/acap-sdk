@@ -8,6 +8,7 @@ import { TimeChart, TimeChartComponent} from './TimeChartComponent/TimeChartComp
 import FilterComponent from './FilterComponent/FilterComponent';
 import TimeRangeComponent from './TimeRangeComponent/TimeRangeComponent';
 import SankeyChart from './SankeyChart/SankeyChart';
+import TimeLineComponent from './TimeLineComponent/TimeLineComponent'
 
 
 import BoxComponent from './BoxComponent/BoxComponent';
@@ -17,9 +18,15 @@ import $ from 'jquery';
 require('imports-loader?window.jQuery=jquery!../node_modules/jsrender/jsrender.min.js');
 require('imports-loader?window.jQuery=jquery!../node_modules/datatables/media/js/jquery.dataTables.min.js');
 import tablecss from '../node_modules/datatables/media/css/jquery.dataTables.min.css';
+import fontawesome5 from '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+import fontawesome4 from '../node_modules/font-awesome/css/font-awesome.min.css';
+
+import d3 from '../node_modules/d3/dist/d3.min.js';
+import bb from '../node_modules/billboard.js/dist/billboard.min.js';
+import bbcss from '../node_modules/billboard.js/dist/billboard.min.css';
 
 export { DonutChart, DonutChartComponent, BoxComponent, FilterComponent, Table, TableComponent, 
         PieChart, PieChartComponent, BoxChartComponent, BaseComponent, CustomComponent, 
-        TimeChartComponent, TimeChart, SankeyChart,TimeRangeComponent,
+        TimeChartComponent, TimeChart, SankeyChart,TimeRangeComponent, TimeLineComponent,
         biqUpdateQuery, debug, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv,
         hideElements, showElements}
