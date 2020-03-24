@@ -3,6 +3,7 @@ import BaseChart from '../BaseChart';
 import { debug, generateColumnData } from '../helpers';
 import _chartComponentTemplate from '../chartComponentTemplate.html';
 import bb from 'billboard.js';
+
 class PieChartComponent extends BaseComponent {
     constructor(options) {
         options.template = _chartComponentTemplate;

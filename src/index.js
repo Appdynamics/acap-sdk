@@ -8,11 +8,17 @@ import { TimeChart, TimeChartComponent} from './TimeChartComponent/TimeChartComp
 import FilterComponent from './FilterComponent/FilterComponent';
 import TimeRangeComponent from './TimeRangeComponent/TimeRangeComponent';
 import SankeyChart from './SankeyChart/SankeyChart';
-import TimeLineComponent from './TimeLineComponent/TimeLineComponent'
+import TimeLineComponent from './TimeLineComponent/TimeLineComponent';
+import { Location, GeoMapComponent} from './GeoMapComponent/GeoMapComponent';
 
 
 import BoxComponent from './BoxComponent/BoxComponent';
 import  { hideElements, showElements, biqUpdateQuery, debug, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  } from './helpers';
+
+
+
+// import p5 from '../node_modules/p5/lib/p5.min.js';
+// import p5dom from '../node_modules/p5/lib/addons/p5.dom.min.js';
 
 import $ from 'jquery';
 require('imports-loader?window.jQuery=jquery!../node_modules/jsrender/jsrender.min.js');
@@ -22,10 +28,16 @@ import fontawesome5 from '../node_modules/@fortawesome/fontawesome-free/css/all.
 import fontawesome4 from '../node_modules/font-awesome/css/font-awesome.min.css';
 
 import d3 from '../node_modules/d3/dist/d3.min.js';
+
 import bb from '../node_modules/billboard.js/dist/billboard.min.js';
 import bbcss from '../node_modules/billboard.js/dist/billboard.min.css';
 
-export { DonutChart, DonutChartComponent, BoxComponent, FilterComponent, Table, TableComponent, 
+
+import bootstrap from '../node_modules/bootstrap/dist/js/bootstrap.min.js';
+import bootstrapcss from '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import appdynamics_bootstrap_css from './css/appdynamics_bootstrap.css';
+
+export { Location, GeoMapComponent, DonutChart, DonutChartComponent, BoxComponent, FilterComponent, Table, TableComponent, 
         PieChart, PieChartComponent, BoxChartComponent, BaseComponent, CustomComponent, 
         TimeChartComponent, TimeChart, SankeyChart,TimeRangeComponent, TimeLineComponent,
         biqUpdateQuery, debug, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv,

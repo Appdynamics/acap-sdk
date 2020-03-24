@@ -2,10 +2,10 @@ const path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-    mode: 'development',
-    devtool: 'inline-source-map',
-    devServer: {
-        contentBase: './dist'
+    mode: 'production',
+    entry: {
+        app: './src/index.js'
+        
     },
     optimization: {
 		splitChunks: {
@@ -18,9 +18,6 @@ module.exports = {
 			}
 		}
 	},
-    entry: {
-        app: ['./src/index.js']
-    },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',

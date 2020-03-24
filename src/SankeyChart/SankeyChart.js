@@ -1,4 +1,7 @@
 import BaseChart from '../BaseChart';
+import * as d3 from 'd3';
+import { sankey, sankeyLinkHorizontal } from 'd3-sankey'
+
 export default class SankeyChart extends BaseChart {
     constructor(options) {
       options.div = options.targetId;
@@ -32,16 +35,16 @@ export default class SankeyChart extends BaseChart {
       //input/output/path
       let edgeColor =  chartOptions.pathColor || 'input';
       
-      const _sankey = d3.sankey()
+      const _sankey = sankey()
         .nodeWidth(15)
         .nodePadding(10)
         .extent([[1, 1], [width - 1, height - 5]]);
-      const sankey = ({ nodes, links }) => _sankey({
+      const sankeyobj = ({ nodes, links }) => _sankey({
         nodes: nodes.map(d => Object.assign({}, d)),
         links: links.map(d => Object.assign({}, d))
       });
   
-  
+   
       const f = d3.format(",.0f");
       const format = d => `${f(d)} TWh`;
   
@@ -53,7 +56,7 @@ export default class SankeyChart extends BaseChart {
         .style("width", width)
         .style("height", height);
   
-      const { nodes, links } = sankey(data);
+      const { nodes, links } = sankeyobj(data);
   
       svg.append("g")
         .attr("stroke", "#000")
@@ -107,7 +110,7 @@ export default class SankeyChart extends BaseChart {
         }
   
         link.append("path")
-          .attr("d", d3.sankeyLinkHorizontal())
+          .attr("d", sankeyLinkHorizontal())
           .attr("stroke", d => edgeColor === "path" ? d.uid
             : edgeColor === "input" ? color(d.source.name)
               : color(d.target.name))

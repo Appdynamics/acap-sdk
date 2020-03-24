@@ -1,5 +1,6 @@
 import BaseChart from '../BaseChart';
 import { debug } from '../helpers';
+import bb from 'billboard.js';
 export default class GaugeChart extends BaseChart {
     constructor(options) {
       super(options);
