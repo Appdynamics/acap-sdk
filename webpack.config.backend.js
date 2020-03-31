@@ -12,30 +12,20 @@ fs.readdirSync('node_modules')
   });
 
 module.exports = {
+    target: 'node',
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
         contentBase: './dist'
     },
-    optimization: {
-		splitChunks: {
-			cacheGroups: {
-				commons: {
-					test: /[\\/]node_modules[\\/]/,
-					name: 'vendors',
-					chunks: 'all'
-				}
-			}
-		}
-	},
     entry: {
-        frontend: ['./src/index.js']
+        backend: ['./src/backend.js']
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
         library: 'ACAP',
-        libraryTarget: 'var'
+        libraryTarget: 'umd'
     },
     module: {
         rules: [
@@ -46,15 +36,7 @@ module.exports = {
             },
             { test: /\.(css)$/, use: ['style-loader', 'css-loader'] }
         ]
-    },
-    plugins: [
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
-            bb: 'bb',
-            d3: 'd3'
-        })
-    ]
+    }
 
     // ,
     // externals: {
