@@ -4,8 +4,9 @@ var needle = require("needle");
 import { getStartTime, getEndTime } from './DateHelper.js';
 var minErrorCode = 400;
 export default class AnalyticsManager {
-    constructor(config) {
+    constructor(config, limit) {
         this.config = config;
+        this.limit = limit || 10;
     }
     simpleQuery(query, callback) {
 
@@ -48,7 +49,10 @@ export default class AnalyticsManager {
 
     analyticsQuery(query, start, end, limit, callback) {
         var AM = this;
-        console.log(this.config);
+       if(!limit) {
+           limit = this.limit;
+       }
+        
         var url = this.config.analyticsUrl + "/events/query?start=" + start + "&end=" + end + "&limit=" + limit;
         var options = {
             method: 'POST',
