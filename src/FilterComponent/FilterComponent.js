@@ -46,6 +46,7 @@ export default class FilterComponent extends BaseComponent {
                     results.push({ field: filter.adqlField, value: value });
                 }
             });
+            console.log(results);
             this._biqFilters = results;
             if (onClick) {
                 onClick(this._biqFilters);

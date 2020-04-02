@@ -79,6 +79,7 @@ var _debugBiQAppCharts = true;
 
 
 var biqUpdateQuery = function (options, query, filters) {
+  console.log(filters);
     if (options.ignoreFilters) {
         return query;
     } else {

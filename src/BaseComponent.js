@@ -1,6 +1,7 @@
 import CoreComponent from './CoreComponent';
 import { biqUpdateQuery, debug, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  } from './helpers';
 import $ from 'jquery';
+import { search } from './biq-app';
 import _chartComponentTemplate from './chartComponentTemplate.html';
 require('jsrender')($);
 
@@ -8,6 +9,7 @@ export default class BaseComponent extends CoreComponent {
     constructor(options, chart) {
         super(options)
         this.chart = chart;
+        this.filtercomponent = options.filtercomponent || null;
         if (this.options.preProcessFn) {
             this.preProcess = this.options.preProcessFn;
         }
@@ -38,6 +40,14 @@ export default class BaseComponent extends CoreComponent {
     }
 
     _updateQuery(options, query) {
+        var _biqFilters = [];
+        console.log('filter');
+        console.log(this.filtercomponent);
+        if(this.filtercomponent) {
+
+            _biqFilters = this.filtercomponent._biqFilters;
+
+        }
         return biqUpdateQuery(options, query, _biqFilters);
     }
 

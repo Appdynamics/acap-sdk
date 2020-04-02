@@ -326,7 +326,21 @@ function replaceNulls(query){
     return query;
 }
 
+function toggleQueryBtnDisabled() {
+    var querybtn = $('#_submitFilter');
+
+    querybtn.prop('disabled', true);
+    querybtn.html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loading...`);
+
+}
+function toggleQueryBtnEnabled() {
+    var querybtn = $('#_submitFilter');
+    querybtn.prop('disabled', false);
+    querybtn.html(`Query`);
+
+}
 function postQuery (analyticsUrl,query,start,end,callback){
+    toggleQueryBtnDisabled();
     if(query.toLowerCase().includes("as count")){
         query += " Limit "+ adqlApiResultsLimit;
     }
@@ -341,6 +355,7 @@ function postQuery (analyticsUrl,query,start,end,callback){
             data : request
     }).done(function (data) {
         appLog(request);
+        toggleQueryBtnEnabled();
         if(data[0].error){
             alert("An Error Occurred \n :"+data[0].error);
         }else{
@@ -356,12 +371,14 @@ function postQuery (analyticsUrl,query,start,end,callback){
 
 function makePostCall (url,parms,callback){
     startAnim(url);
+    toggleQueryBtnDisabled();
     $.ajax({
             url: url,
             method: "POST",
             data : parms
     }).done(function (data) {
         appLog(data);
+        toggleQueryBtnEnabled();
         if(data[0].error){
             alert("An Error Occurred \n :"+data[0].error);
         }else{
@@ -377,10 +394,12 @@ function makePostCall (url,parms,callback){
 
 function makeGetCall (url,callback){
     startAnim(url);
+    toggleQueryBtnDisabled();
       $.ajax({
               url: url,
               method: "GET"
       }).done(function (data) {
+          toggleQueryBtnEnabled();
           stopAnim(url);
           callback(data);
       }).fail(function (jqXHR, message) { 
@@ -496,7 +515,7 @@ function autoComplete(selector,query,callback){
         }
     }).focus(function() {
         $(this).autocomplete("search", "*");
-    });
+    }); 
 }
 
 function buildQueryForAutoCompleteOnFilter(query,adqlField,value){
@@ -639,4 +658,4 @@ try{
    // console.log(error);
   }
 
-export { getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, getTimeRange, getTimeRangeStartingFromDate, getTimeRangeBasedOnSelection, applyTimeBasedOnSelection,  applyTimeForSelection, getTimeBucket, updateDateBasedOnSelection, getTimeBucketAsMinutes, stopAnim, startAnim, appLog, replaceNulls,  postQuery, makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, startDate, endDate, copyTextToClipBoard, roundValue, escapeQuery, shortTime, formatDateLong, formatDate,getDateTimeRangeDescription, includeClauses, numberClause, stringClause, getTimeRangeText, autoCompleteOnFilter,buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray}
+export { search, searchRestUI, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, getTimeRange, getTimeRangeStartingFromDate, getTimeRangeBasedOnSelection, applyTimeBasedOnSelection,  applyTimeForSelection, getTimeBucket, updateDateBasedOnSelection, getTimeBucketAsMinutes, stopAnim, startAnim, appLog, replaceNulls,  postQuery, makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, startDate, endDate, copyTextToClipBoard, roundValue, escapeQuery, shortTime, formatDateLong, formatDate,getDateTimeRangeDescription, includeClauses, numberClause, stringClause, getTimeRangeText, autoCompleteOnFilter,buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray}
