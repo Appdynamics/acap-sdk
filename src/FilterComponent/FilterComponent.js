@@ -24,6 +24,7 @@ export default class FilterComponent extends BaseComponent {
     }
 
     draw(onClick, callback) {
+        var fc = this;
         var options = this.getOptions();
         this.template = $.templates(options.template);
         $("#" + options.targetId).html(this.template.render(options));
@@ -46,10 +47,9 @@ export default class FilterComponent extends BaseComponent {
                     results.push({ field: filter.adqlField, value: value });
                 }
             });
-            console.log(results);
-            this._biqFilters = results;
+            fc._biqFilters = results;
             if (onClick) {
-                onClick(this._biqFilters);
+                onClick(fc._biqFilters);
             }
         });
         $("#_resetFilter").on("click", function () {

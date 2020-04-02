@@ -41,8 +41,6 @@ export default class BaseComponent extends CoreComponent {
 
     _updateQuery(options, query) {
         var _biqFilters = [];
-        console.log('filter');
-        console.log(this.filtercomponent);
         if(this.filtercomponent) {
 
             _biqFilters = this.filtercomponent._biqFilters;
@@ -176,7 +174,6 @@ export default class BaseComponent extends CoreComponent {
                 }
             });
         } else {
-            console.log(options.template);
             $("#" + options.targetId).html(
                 $.templates(options.template).render(options)
               );

@@ -65,8 +65,8 @@ export default class AnalyticsManager {
                 "X-CSRF-TOKEN": "Content-type: application/vnd.appd.events+text;v=2"
             }
         };
-        //addproxy(options);
-        console.log(url);
+
+
 
         needle.post(url, query, options, function (err, resp) {
                 

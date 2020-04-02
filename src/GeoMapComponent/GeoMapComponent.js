@@ -151,7 +151,6 @@ class GeoMapComponent extends BaseChart {
         var myRenderer = L.canvas({ padding: 0.5 });
        
         var invalidZips = [];
-        console.log(drawable_data);
 
         for (let r = 0; r < drawable_data.length; r++) {
             var location = drawable_data[r];
