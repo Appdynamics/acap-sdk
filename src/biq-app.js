@@ -649,7 +649,13 @@ var copyTextToClipBoard = function(text){
 	$(oText).remove();
 	return bResult;
 }
-
+var openAdql = function(controller, query,range){
+    query = replaceNulls(query);
+    copyTextToClipBoard(query);
+    var query = escapeQuery(query);
+    var url = controller+"/controller/#/location=ANALYTICS_ADQL_SEARCH&timeRange=Custom_Time_Range.BETWEEN_TIMES."+range.end+"."+range.start+".120&adqlQuery="+query+"&searchType=SINGLE&searchMode=ADVANCED&viewMode=DATA";
+    window.open(url,'_blank');
+}
 try{
     if(exports){
         exports.buildQueryForAutoCompleteOnFilter  = buildQueryForAutoCompleteOnFilter;
@@ -658,4 +664,4 @@ try{
    // console.log(error);
   }
 
-export { search, searchRestUI, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, getTimeRange, getTimeRangeStartingFromDate, getTimeRangeBasedOnSelection, applyTimeBasedOnSelection,  applyTimeForSelection, getTimeBucket, updateDateBasedOnSelection, getTimeBucketAsMinutes, stopAnim, startAnim, appLog, replaceNulls,  postQuery, makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, startDate, endDate, copyTextToClipBoard, roundValue, escapeQuery, shortTime, formatDateLong, formatDate,getDateTimeRangeDescription, includeClauses, numberClause, stringClause, getTimeRangeText, autoCompleteOnFilter,buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray}
+export { openAdql, search, searchRestUI, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, getTimeRange, getTimeRangeStartingFromDate, getTimeRangeBasedOnSelection, applyTimeBasedOnSelection,  applyTimeForSelection, getTimeBucket, updateDateBasedOnSelection, getTimeBucketAsMinutes, stopAnim, startAnim, appLog, replaceNulls,  postQuery, makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, startDate, endDate, copyTextToClipBoard, roundValue, escapeQuery, shortTime, formatDateLong, formatDate,getDateTimeRangeDescription, includeClauses, numberClause, stringClause, getTimeRangeText, autoCompleteOnFilter,buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray}
