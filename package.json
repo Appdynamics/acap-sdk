@@ -8,7 +8,8 @@
     "build:back": "webpack --config webpack.config.backend.js",
     "prepare": "sass ./scss/appdynamics_bootstrap.scss ./src/css/appdynamics_bootstrap.css",
     "start:dev": "webpack-dev-server --open",
-    "start:back": "webpack-dev-server --open"
+    "start:back": "webpack-dev-server --open",
+    "jsdoc" : "./node_modules/.bin/jsdoc -c jsdoc.json"
   },
   "files": [
     "dist/**/*"
@@ -39,6 +40,7 @@
     "css-loader": "^3.4.2",
     "html-loader": "^0.5.5",
     "imports-loader": "^0.8.0",
+    "jsdoc": "~3.6.3",
     "sass": "^1.23.1",
     "style-loader": "^1.1.3",
     "url-loader": "^3.0.0",
