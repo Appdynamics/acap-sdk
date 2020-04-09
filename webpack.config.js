@@ -29,7 +29,7 @@ module.exports = {
 		}
 	},
     entry: {
-        frontend: ['./src/index.js']
+        app: ['./src/index.js']
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
