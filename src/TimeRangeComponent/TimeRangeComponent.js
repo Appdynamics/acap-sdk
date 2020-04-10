@@ -1,4 +1,5 @@
 import BaseComponent  from '../BaseComponent';
+import { getTimeBucket, getTimeRangeText,getTimeRange} from '../biq-app';
 import _timeRangeComponentTemplate from './TimeRangeComponent.html';
 export default class TimeRangeComponent extends BaseComponent {
     constructor(options) {
