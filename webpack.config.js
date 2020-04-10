@@ -15,19 +15,9 @@ module.exports = {
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: './dist'
+        contentBase: path.join(__dirname, 'dist'),
+        watchContentBase:true
     },
-    optimization: {
-		splitChunks: {
-			cacheGroups: {
-				commons: {
-					test: /[\\/]node_modules[\\/]/,
-					name: 'vendors',
-					chunks: 'all'
-				}
-			}
-		}
-	},
     entry: {
         app: ['./src/index.js']
     },
