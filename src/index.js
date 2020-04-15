@@ -12,6 +12,7 @@ import TimeLineComponent from './TimeLineComponent/TimeLineComponent';
 import { Location, GeoMapComponent} from './GeoMapComponent/GeoMapComponent';
 import { BarChartComponent, BarChart} from './BarChartComponent/BarChartComponent';
 import BoxComponent from './BoxComponent/BoxComponent';
+import DropList from './DropList/DropList';
 
 import  { hideElements, showElements, biqUpdateQuery, debug, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  } from './helpers';
 import { startDate, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, getTimeRange, getTimeRangeStartingFromDate, getTimeRangeBasedOnSelection, applyTimeBasedOnSelection,  applyTimeForSelection, getTimeBucket, updateDateBasedOnSelection, getTimeBucketAsMinutes, stopAnim, startAnim, appLog, replaceNulls,  postQuery, makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, endDate, copyTextToClipBoard, roundValue, escapeQuery, shortTime, formatDateLong, formatDate,getDateTimeRangeDescription, includeClauses, numberClause, stringClause, getTimeRangeText, autoCompleteOnFilter,buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray, openAdql} from './biq-app.js';
@@ -28,13 +29,16 @@ import d3 from '../node_modules/d3/dist/d3.min.js';
 import bb from '../node_modules/billboard.js/dist/billboard.min.js';
 import bbcss from '../node_modules/billboard.js/dist/billboard.min.css';
 
+import multipleselect from '../node_modules/multiple-select/dist/multiple-select.min.js';
+import multipleselectcss from '../node_modules/multiple-select/dist/multiple-select.min.css';
+
 import bootstrap from '../node_modules/bootstrap/dist/js/bootstrap.min.js';
 import bootstrapcss from '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import appdynamics_bootstrap_css from './css/appdynamics_bootstrap.css';
 
 export { openAdql, Location, GeoMapComponent, DonutChart, DonutChartComponent, BarChartComponent, BarChart, BoxComponent, FilterComponent, Table, TableComponent, 
         PieChart, PieChartComponent, BoxChartComponent, BaseComponent, CustomComponent, 
-        TimeChartComponent, TimeChart, SankeyChart,TimeRangeComponent, TimeLineComponent,
+        TimeChartComponent, TimeChart, SankeyChart,TimeRangeComponent, TimeLineComponent, DropList,
         biqUpdateQuery, debug, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv,
         hideElements, showElements, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, getTimeRange, 
         getTimeRangeStartingFromDate, getTimeRangeBasedOnSelection, applyTimeBasedOnSelection,  applyTimeForSelection, 

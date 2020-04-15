@@ -49,6 +49,10 @@ export default class BaseChart extends CoreComponent {
         options.div = options.parentDiv + "-chart";
       }
     }
+
+    getTargetId(){
+      return this.options.targetId;
+    }
   
     renderOuterComponent(template) {
       if (!$("#" + this.getDivId()).length && this.options.parentDiv) {
