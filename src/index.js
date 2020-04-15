@@ -12,7 +12,7 @@ import TimeLineComponent from './TimeLineComponent/TimeLineComponent';
 import { Location, GeoMapComponent} from './GeoMapComponent/GeoMapComponent';
 import { BarChartComponent, BarChart} from './BarChartComponent/BarChartComponent';
 import BoxComponent from './BoxComponent/BoxComponent';
-
+import HorizontalBarComponent from './HorizontalBarComponent/HorizontalBarComponent';
 import  { hideElements, showElements, biqUpdateQuery, debug, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  } from './helpers';
 import { startDate, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, getTimeRange, getTimeRangeStartingFromDate, getTimeRangeBasedOnSelection, applyTimeBasedOnSelection,  applyTimeForSelection, getTimeBucket, updateDateBasedOnSelection, getTimeBucketAsMinutes, stopAnim, startAnim, appLog, replaceNulls,  postQuery, makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, endDate, copyTextToClipBoard, roundValue, escapeQuery, shortTime, formatDateLong, formatDate,getDateTimeRangeDescription, includeClauses, numberClause, stringClause, getTimeRangeText, autoCompleteOnFilter,buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray, openAdql} from './biq-app.js';
 
@@ -32,7 +32,7 @@ import bootstrap from '../node_modules/bootstrap/dist/js/bootstrap.min.js';
 import bootstrapcss from '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import appdynamics_bootstrap_css from './css/appdynamics_bootstrap.css';
 
-export { openAdql, Location, GeoMapComponent, DonutChart, DonutChartComponent, BarChartComponent, BarChart, BoxComponent, FilterComponent, Table, TableComponent, 
+export { HorizontalBarComponent, openAdql, Location, GeoMapComponent, DonutChart, DonutChartComponent, BarChartComponent, BarChart, BoxComponent, FilterComponent, Table, TableComponent, 
         PieChart, PieChartComponent, BoxChartComponent, BaseComponent, CustomComponent, 
         TimeChartComponent, TimeChart, SankeyChart,TimeRangeComponent, TimeLineComponent,
         biqUpdateQuery, debug, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv,
