@@ -63,6 +63,7 @@ export default class BaseComponent extends CoreComponent {
             this.postRender,
             callback
         );
+        return this;
     }
 
     _draw(

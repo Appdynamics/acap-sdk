@@ -101,6 +101,7 @@ export default class BaseChart extends CoreComponent {
       if (callback) {
         callback(this.options);
       }
+      return this;
     }
   }
   
