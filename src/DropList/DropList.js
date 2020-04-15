@@ -5,25 +5,33 @@ export default class DropList extends BaseChart {
     constructor(options) {
       super(options);
     }
+
+    _selectComp(){
+      var targetId = super.getTargetId();
+      var comp = $("#"+targetId);
+      if(!comp){
+        throw "Attempting to locate targetId :"+targetId+" unable to find element using $('#"+targetId+"')";
+      }else{
+        return comp;
+      }
+    }
   
     renderChart(data, clickFunction) {
       var options = super.getChartOptions();
-      var targetId = super.getTargetId();
-      var selectComp = $("#"+targetId);
-     
       /**
        * in case they pass the data attribute similar to other components
        */
       if(data){
         options.data = data;
       }
+      if(clickFunction){
+        options.onClick = clickFunction;
+      }
 
-      selectComp.multipleSelect(options);
+      this._selectComp().multipleSelect(options);
     }
 
     multipleSelect(command){
-        var targetId = super.getDiv();
-        var selectComp = $("a#"+targetId);
-        selectComp.multipleSelect(command);
+       return this._selectComp().multipleSelect(command);
     }
   }
