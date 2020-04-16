@@ -135,6 +135,7 @@ class TimeChart extends BaseChart {
         };
         chartOptions.data[dataKey] = data;
         super.applyExtraOptions(chartOptions);
+
         this.chart = bb.generate(chartOptions);
 
     }

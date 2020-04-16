@@ -35,6 +35,7 @@ export default class SparkLineChart extends TimeChart {
       };
       chartOptions.data[dataKey] = data;
       super.applyExtraOptions(chartOptions);
+
       this.chart = bb.generate(chartOptions);
     }
   }

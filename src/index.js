@@ -27,6 +27,8 @@ import fontawesome5 from '../node_modules/@fortawesome/fontawesome-free/css/all.
 import fontawesome4 from '../node_modules/font-awesome/css/font-awesome.min.css';
 
 import moment from '../node_modules/moment/moment.js';
+import daterangepicker from '../node_modules/daterangepicker/daterangepicker.js'
+import daterangepickercss from '../node_modules/daterangepicker/daterangepicker.css'
 
 import d3 from '../node_modules/d3/dist/d3.min.js';
 

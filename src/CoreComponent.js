@@ -11,6 +11,10 @@ export default class CoreComponent {
         return this.options;
     }
 
+    getTargetId(){
+        return this.options.targetId;
+    }
+
     getExtraOptions() {
         if (this.getOptions().options) {
             return this.getOptions().options;

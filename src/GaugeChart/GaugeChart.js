@@ -24,6 +24,7 @@ export default class GaugeChart extends BaseChart {
       };
   
       super.applyExtraOptions(chartOptions);
+
       this.chart = bb.generate(chartOptions);
       super.show();
       super.animate();

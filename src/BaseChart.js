@@ -50,10 +50,6 @@ export default class BaseChart extends CoreComponent {
       }
     }
 
-    getTargetId(){
-      return this.options.targetId;
-    }
-  
     renderOuterComponent(template) {
       if (!$("#" + this.getDivId()).length && this.options.parentDiv) {
         super.debugMessage("Rendering template to div : " + this.options.parentDiv);

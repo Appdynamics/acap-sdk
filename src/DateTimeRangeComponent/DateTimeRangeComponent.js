@@ -1,7 +1,9 @@
 import BaseComponent from '../BaseComponent';
+import $ from 'jquery';
 import { getTimeBucket, getTimeRangeText, getTimeRange } from '../biq-app';
 import _dateRangeComponentTemplate from './DateTimeRangeComponent.html';
-const compId = "#ACAP_daterange";
+import moment from 'moment';
+const COMP_SELECTOR = "#ACAP_daterange";
 
 export default class DateTimeRangeComponent extends BaseComponent {
     constructor(options) {
@@ -85,13 +87,13 @@ export default class DateTimeRangeComponent extends BaseComponent {
 
         super.applyExtraOptions(pickerOptions);
 
-        $(compId).daterangepicker(pickerOptions, function (start, end, label) {
+        $(COMP_SELECTOR).daterangepicker(pickerOptions, function (start, end, label) {
             drc.timeRange.start = start.valueOf();
             drc.timeRange.end = end.valueOf();
             //console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
         });
 
-        $(compId).on("change", function () {
+        $(COMP_SELECTOR).on("change", function () {
           if (onClick) {
             onClick({
               timebucket: getTimeBucket(),

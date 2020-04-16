@@ -34,7 +34,8 @@
     "popper.js": "^1.16.1",
     "q": "^1.5.1",
     "timelines-chart": "2.8.4",
-    "multiple-select": "^1.5.2"
+    "multiple-select": "^1.5.2",
+    "daterangepicker": "^3.0.5"
   },
   "devDependencies": {
     "css-loader": "^3.4.2",

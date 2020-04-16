@@ -92,6 +92,7 @@ class GeoMapComponent extends BaseChart {
         });
 
         super.applyExtraOptions(options);
+
         this.drawModels(data);
         
         this.map.featureGroup = this.locationFeatureGroup;

@@ -43,6 +43,7 @@ class PieChart extends BaseChart {
             super.getExtraOptions().color = { pattern: defaultColorPattern };
         }
         super.applyExtraOptions(chartOptions);
+
         this.chart = bb.generate(chartOptions);
         super.show();
         super.animate();
