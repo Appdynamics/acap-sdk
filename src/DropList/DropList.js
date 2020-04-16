@@ -1,5 +1,4 @@
 import BaseChart from '../BaseChart';
-import { debug } from '../helpers';
 
 export default class DropList extends BaseChart {
     constructor(options) {
@@ -17,7 +16,7 @@ export default class DropList extends BaseChart {
     }
   
     renderChart(data, clickFunction) {
-      var options = super.getChartOptions();
+      var options = super.getExtraOptions();
       /**
        * in case they pass the data attribute similar to other components
        */
@@ -27,7 +26,7 @@ export default class DropList extends BaseChart {
       if(clickFunction){
         options.onClick = clickFunction;
       }
-
+      super.debugObject(options);
       this._selectComp().multipleSelect(options);
     }
 

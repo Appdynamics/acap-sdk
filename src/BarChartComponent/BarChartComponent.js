@@ -1,6 +1,5 @@
 import BaseComponent  from '../BaseComponent';
 import BaseChart from '../BaseChart';
-import { debug, generateColumnData } from '../helpers';
 import _chartComponentTemplate from '../chartComponentTemplate.html';
 import bb from 'billboard.js';
 
@@ -23,7 +22,7 @@ class BarChart extends BaseChart {
     renderChart(data, clickFunction) {
         super.renderOuterComponent(this.template);
         super.setTitle(super.getOptions());
-        var groups = this.getChartOptions().groups;
+        var groups = this.getExtraOptions().groups;
         var chartOptions = {
             bindto: super.getDiv(),
             data: {
@@ -31,7 +30,6 @@ class BarChart extends BaseChart {
                 type: "bar",
                 onclick: function (d, i) {
                     if (clickFunction) {
-                        debug(this, JSON.stringify(d));
                         clickFunction(d);
                     }
                 },
@@ -40,7 +38,8 @@ class BarChart extends BaseChart {
             legend: { show: true }
         };
 
-        super.updateChartOptions(chartOptions);
+        super.applyExtraOptions(chartOptions);
+        
         this.chart = bb.generate(chartOptions);
         super.show();
         super.animate();

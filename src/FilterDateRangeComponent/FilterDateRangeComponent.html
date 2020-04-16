@@ -1,0 +1,15 @@
+<li class="sidebar-search">
+    <div class="form-group">
+        <label>Date Range:</label>
+        <div class="form-group" id="daterange_container"></div>
+    </div>
+    {{for filters}}
+        <div class="form-group">
+            <label>{{:label}}</label>
+            <input type="text" class="form-control" id="{{:id}}"/>
+        </div>
+    {{/for}}
+    <div class="btn-group">
+        <button type="submit" class="btn btn-primary" id="_resetFilter">Reset</button> &nbsp;<button type="submit" class="btn btn-primary" id="_submitFilter">Query</button>
+    </div>
+</li>

@@ -1,5 +1,5 @@
 import CoreComponent from './CoreComponent';
-import { biqUpdateQuery, debug, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  } from './helpers';
+import { biqUpdateQuery, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  } from './helpers';
 import $ from 'jquery';
 import { search } from './biq-app';
 import _chartComponentTemplate from './chartComponentTemplate.html';
@@ -123,28 +123,28 @@ export default class BaseComponent extends CoreComponent {
 
     generateRandomData() {
         var max = 1000;
-        if (this.getChartOptions() && this.getChartOptions().max) {
-            max = this.getChartOptions().max;
+        if (this.getExtraOptions() && this.getExtraOptions().max) {
+            max = this.getExtraOptions().max;
         }
 
         var intervals = 60;
-        if (this.getChartOptions() && this.getChartOptions().intervals) {
-            intervals = this.getChartOptions().intervals;
+        if (this.getExtraOptions() && this.getExtraOptions().intervals) {
+            intervals = this.getExtraOptions().intervals;
         }
 
         var bucket = "mins";
-        if (this.getChartOptions() && this.getChartOptions().bucket) {
-            bucket = this.getChartOptions().bucket;
+        if (this.getExtraOptions() && this.getExtraOptions().bucket) {
+            bucket = this.getExtraOptions().bucket;
         }
 
         var xmin = 0;
-        if (this.getChartOptions() && this.getChartOptions().xmin) {
-            xmin = this.getChartOptions().xmin;
+        if (this.getExtraOptions() && this.getExtraOptions().xmin) {
+            xmin = this.getExtraOptions().xmin;
         }
 
         var xmax = intervals;
-        if (this.getChartOptions() && this.getChartOptions().xmax) {
-            xmax = this.getChartOptions().xmax;
+        if (this.getExtraOptions() && this.getExtraOptions().xmax) {
+            xmax = this.getExtraOptions().xmax;
         }
 
         return generateRandomTimeData(max, intervals, bucket, xmin, xmax);

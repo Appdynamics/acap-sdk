@@ -1,12 +1,12 @@
 import { TimeChart } from '../TimeChartComponent/TimeChartComponent';
 import bb from 'billboard.js';
+
 export default class SparkLineChart extends TimeChart {
     constructor(options) {
       super(options);
     }
   
     renderGraph(dataKey, data, clickFunction) {
-      var options = super.getOptions();
       var type = "area-spline";
       if (this.getTypeOverride()) {
         type = this.getTypeOverride();
@@ -34,7 +34,7 @@ export default class SparkLineChart extends TimeChart {
         }
       };
       chartOptions.data[dataKey] = data;
-      super.updateChartOptions(chartOptions);
+      super.applyExtraOptions(chartOptions);
       this.chart = bb.generate(chartOptions);
     }
   }

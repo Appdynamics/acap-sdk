@@ -1,6 +1,7 @@
 import BaseComponent  from '../BaseComponent';
 import _filterComponentTemplate from './FilterComponent.html';
 import TimeRangeComponent from '../TimeRangeComponent/TimeRangeComponent';
+
 export default class FilterComponent extends BaseComponent {
     constructor(options) {
         super(options);
@@ -8,8 +9,6 @@ export default class FilterComponent extends BaseComponent {
         this._biqFilters = [];
 
     }
-
-
 
     updateQueryWithFilters(query) {
         if (this._biqFilters && this._biqFilters.length > 0) {
@@ -61,12 +60,17 @@ export default class FilterComponent extends BaseComponent {
         if (callback) {
             callback(options);
         }
-        new TimeRangeComponent({
-            targetId: "_timeSelector"
-        }).draw();
+        
+        _drawFilterComponent();
     }
 
     updateQuery(query) {
         return this.updateQueryWithFilters(query);
+    }
+
+    _drawFilterComponent(){
+        new TimeRangeComponent({
+            targetId: "_timeSelector"
+        }).draw();
     }
 }

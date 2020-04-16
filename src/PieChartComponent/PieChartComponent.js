@@ -1,6 +1,6 @@
-import BaseComponent  from '../BaseComponent';
+import BaseComponent from '../BaseComponent';
 import BaseChart from '../BaseChart';
-import { debug, generateColumnData } from '../helpers';
+import { generateColumnData } from '../helpers';
 import _chartComponentTemplate from '../chartComponentTemplate.html';
 import bb from 'billboard.js';
 
@@ -32,7 +32,6 @@ class PieChart extends BaseChart {
                 type: "pie",
                 onclick: function (d, i) {
                     if (clickFunction) {
-                        debug(this, JSON.stringify(d));
                         clickFunction(d);
                     }
                 }
@@ -40,10 +39,10 @@ class PieChart extends BaseChart {
             legend: { show: true }
         };
 
-        super.updateChartOptions(chartOptions);
-        if (!chartOptions.color) {
-            chartOptions.color = { pattern: defaultColorPattern };
+        if (!super.getExtraOptions().color) {
+            super.getExtraOptions().color = { pattern: defaultColorPattern };
         }
+        super.applyExtraOptions(chartOptions);
         this.chart = bb.generate(chartOptions);
         super.show();
         super.animate();
