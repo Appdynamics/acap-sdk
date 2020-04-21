@@ -20,8 +20,10 @@ import  { hideElements, showElements, biqUpdateQuery, appLogCompObject, appLogCo
 import { startDate, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, getTimeRange, getTimeRangeStartingFromDate, getTimeRangeBasedOnSelection, applyTimeBasedOnSelection,  applyTimeForSelection, getTimeBucket, updateDateBasedOnSelection, getTimeBucketAsMinutes, stopAnim, startAnim, replaceNulls,  postQuery, makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, endDate, copyTextToClipBoard, roundValue, escapeQuery, shortTime, formatDateLong, formatDate,getDateTimeRangeDescription, includeClauses, numberClause, stringClause, getTimeRangeText, autoCompleteOnFilter,buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray, openAdql} from './biq-app.js';
 
 import $ from 'jquery';
+require('imports-loader?window.jQuery=jquery!../node_modules/jquery-ui/ui/widgets/autocomplete.js');
 require('imports-loader?window.jQuery=jquery!../node_modules/jsrender/jsrender.min.js');
 require('imports-loader?window.jQuery=jquery!../node_modules/datatables/media/js/jquery.dataTables.min.js');
+import autocompletecss from '../node_modules/jquery-ui/themes/base/autocomplete.css';
 import tablecss from '../node_modules/datatables/media/css/jquery.dataTables.min.css';
 import fontawesome5 from '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 import fontawesome4 from '../node_modules/font-awesome/css/font-awesome.min.css';

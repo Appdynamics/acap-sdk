@@ -96,10 +96,10 @@ export default class DateTimeRangeComponent extends BaseComponent {
         $(COMP_SELECTOR).on("change", function () {
           if (onClick) {
             onClick({
-              timebucket: getTimeBucket(),
-              text: getTimeRangeText(),
-              start: getTimeRange().start,
-              end: getTimeRange().end
+              timebucket: getTimeBucket(COMP_SELECTOR),
+              text: getTimeRangeText(COMP_SELECTOR),
+              start: getTimeRange(COMP_SELECTOR).start,
+              end: getTimeRange(COMP_SELECTOR).end
             });
           }
         });

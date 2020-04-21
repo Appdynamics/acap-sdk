@@ -1,5 +1,4 @@
 import $ from 'jquery';
-
 var generateRandomTimeData = function (max, intervals, bucket, xmin, xmax) {
   if (!max) {
     max = 1000; //max y value
@@ -94,6 +93,11 @@ function appLogCompMessage(comp, message) {
   }
 }
 
+var formatDateLong = function (d) {
+  var datestring = ("0" + (d.getMonth() + 1)).slice(-2) + "/" + ("0" + d.getDate()).slice(-2) + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2) + ":" + ("0" + d.getSeconds()).slice(-2);
+  return datestring;
+}
+
 function appLogMessage(message){
   if(_debugCAP){
       console.log(message);
@@ -107,7 +111,7 @@ function appLogObject(obj){
   if(_debugCAP){
       console.log(JSON.stringify(obj));
       if(obj.start || obj.end){
-          console.log("start: "+formatDateLong(new Date(message.start))+" end: "+formatDateLong(new Date(message.end)));
+          console.log("start: "+formatDateLong(new Date(obj.start))+" end: "+formatDateLong(new Date(obj.end)));
       }
   }
 }

@@ -33,36 +33,37 @@ function jsonDates(start, end) {
     return { start: start.getTime(), end: end.getTime() };
 }
 
-function getTimeBucketFromDate(date) {
+function getTimeBucketFromDate(selector,date) {
     var start = startDate(date);
     var end = endDate(date);
-    start.setMinutes(start.getMinutes() - getTimeBucketAsMinutes());
+    start.setMinutes(start.getMinutes() - getTimeBucketAsMinutes(selector));
     return jsonDates(start, end);
 }
 
 //User selects time range selection
 //Return start minute and end minute based on date range selected
-function getTimeRange() {
+function getTimeRange(selection) {
     var end = endDate();
-    var start = applyTimeBasedOnSelection(startDate());
+    var start = applyTimeBasedOnSelection(selection,startDate());
     return jsonDates(start, end);
 }
 
-function getTimeRangeStartingFromDate(date) {
+function getTimeRangeStartingFromDate(timeSelector,date) {
     var end = endDate(date);
-    var start = applyTimeBasedOnSelection(startDate(date));
+    var start = applyTimeBasedOnSelection(timeSelector,startDate(date));
     return jsonDates(start, end);
 }
 
-function getTimeRangeBasedOnSelection(selection) {
+function getTimeRangeBasedOnSelection(timeSelector) {
     var end = endDate();
     var start = applyTimeForSelection(startDate(), selection);
     return jsonDates(start, end);
 }
 
 
-function applyTimeBasedOnSelection(start) {
-    var selection = $("#timeRange").val();
+function applyTimeBasedOnSelection(timeSelector,start) {
+    //var selection = $("#timeRange").val();
+    var selection = $("#"+timeSelector).val();
     updateDateBasedOnSelection(start, selection)
     return start;
 }
@@ -138,8 +139,9 @@ function updateDateBasedOnSelection(start, selection) {
 
 
 
-function getTimeBucket() {
-    var selection = $("#timeRange").val();
+function getTimeBucket(selector) {
+    //var selection = $("#timeRange").val();
+    let selection = $("#"+selector).val();
     switch (selection) {
         case '1':
             return '1m';
@@ -201,8 +203,8 @@ function getTimeBucket() {
     }
 }
 
-function getTimeBucketAsMinutes() {
-    var timeBucket = getTimeBucket();
+function getTimeBucketAsMinutes(selector) {
+    var timeBucket = getTimeBucket(selector);
     switch (timeBucket) {
         case '1m':
             return 1;
@@ -281,12 +283,13 @@ const analyticsRestUIUrl = '/analytics/restui';
 
 function searchWithOptions(options, callback) {
     var url = analyticsUrl;
-    var timeRange = getTimeRange();
+    let timeSelector = options.timeSelector;
+    var timeRange = getTimeRange(timeSelector);
     if (options.url) {
         url = options.url;
     }
     if (options.date) {
-        timeRange = getTimeBucketFromDate(options.date);
+        timeRange = getTimeBucketFromDate(timeSelector,options.date);
     } else if (options.timeRange) {
         timeRange = options.timeRange;
     } else if (options.start && options.end) {
@@ -298,8 +301,8 @@ function searchWithOptions(options, callback) {
     postQuery(url, options.query, timeRange.start, timeRange.end, callback);
 }
 
-function search(options, callback) {
-    searchWithOptions(options, callback)
+function search(queryOptions, callback) {
+    searchWithOptions(queryOptions, callback);
 }
 
 function searchRestUI(options, callback) {
@@ -349,7 +352,7 @@ function postQuery(analyticsUrl, query, start, end, callback) {
         if (data[0].error) {
             alert("An Error Occurred \n :" + data[0].error);
         } else {
-            appLogpMessage(data[0].results);
+            appLogMessage(data[0].results);
             callback(data[0].results);
         }
         stopAnim(query);
@@ -425,10 +428,10 @@ function getHealthColor(health) {
     }
 }
 
-function lookup(query, callback) {
-    var timeRange = getTimeRange();
+function lookup(query, timeSelector, callback) {
+    var timeRange = getTimeRange(timeSelector);
     postQuery(analyticsUrl, query, timeRange.start, timeRange.end, function (results) {
-        filteredList = [];
+        let filteredList = [];
         if (results) {
             results.forEach(function (rec) {
                 if (rec[0]) {
@@ -443,10 +446,10 @@ function lookup(query, callback) {
     });
 }
 
-function lookupArray(query, callback) {
-    var timeRange = getTimeRange();
+function lookupArray(query, timeSelector, callback) {
+    var timeRange = getTimeRange(timeSelector);
     postQuery(analyticsUrl, query, timeRange.start, timeRange.end, function (results) {
-        filteredList = [];
+        let filteredList = [];
         results.forEach(function (rec) {
             rec[0].forEach(function (field) {
                 if ($.inArray(field, filteredList) < 0) {
@@ -458,12 +461,12 @@ function lookupArray(query, callback) {
     });
 }
 
-function autoCompleteArray(selector, source, adqlField, callback) {
+function autoCompleteArray(selector, source, adqlField, timeSelector, callback) {
     $(selector).autocomplete({
         source: function (request, response) {
             var value = $(selector).val();
             var query = "SELECT " + adqlField + " FROM " + source + " WHERE " + adqlField + " is NOT NULL and " + adqlField + " = '" + value + "*'";
-            lookupArray(query, response);
+            lookupArray(query, timeSelector, response);
         },
         minLength: 1,
         select: function (event, ui) {
@@ -474,12 +477,12 @@ function autoCompleteArray(selector, source, adqlField, callback) {
     });
 }
 
-function autoComplete(selector, query, callback) {
+function autoComplete(selector, query, timeSelector, callback) {
     $(selector).autocomplete({
         sortResults: true,
         source: function (request, response) {
             var value = $(selector).val();
-            lookup(query, response);
+            lookup(query, timeSelector, response);
         },
         minLength: 1,
         select: function (event, ui) {
@@ -517,13 +520,13 @@ function buildQueryForAutoCompleteOnFilter(query, adqlField, value) {
     return tempQuery;
 }
 
-function autoCompleteOnFilter(selector, query, adqlField, callback) {
+function autoCompleteOnFilter(selector, query, adqlField, timeSelector,callback) {
     $(selector).autocomplete({
         sortResults: true,
         source: function (request, response) {
             var value = $(selector).val();
             var tempQuery = buildQueryForAutoCompleteOnFilter(query, adqlField, value);
-            lookup(tempQuery, response);
+            lookup(tempQuery, timeSelector, response);
         },
         minLength: 1,
         select: function (event, ui) {
@@ -537,8 +540,9 @@ function autoCompleteOnFilter(selector, query, adqlField, callback) {
 }
 
 
-function getTimeRangeText() {
-    return $("#timeRange option:selected").text();
+function getTimeRangeText(selector) {
+    //return $("#timeRange option:selected").text();
+    return $("#"+selector+" option:selected").text();
 }
 
 function stringClause(clauses, fieldname, value) {
@@ -633,4 +637,10 @@ try {
     // console.log(error);
 }
 
-export { openAdql, search, searchRestUI, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, getTimeRange, getTimeRangeStartingFromDate, getTimeRangeBasedOnSelection, applyTimeBasedOnSelection, applyTimeForSelection, getTimeBucket, updateDateBasedOnSelection, getTimeBucketAsMinutes, stopAnim, startAnim, replaceNulls, postQuery, makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, startDate, endDate, copyTextToClipBoard, roundValue, escapeQuery, shortTime, formatDateLong, formatDate, getDateTimeRangeDescription, includeClauses, numberClause, stringClause, getTimeRangeText, autoCompleteOnFilter, buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray }
+export { openAdql, search, searchRestUI, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, 
+    getTimeRange, getTimeRangeStartingFromDate, getTimeRangeBasedOnSelection, applyTimeBasedOnSelection, 
+    applyTimeForSelection, getTimeBucket, updateDateBasedOnSelection, getTimeBucketAsMinutes, stopAnim, 
+    startAnim, replaceNulls, postQuery, makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, 
+    startDate, endDate, copyTextToClipBoard, roundValue, escapeQuery, shortTime, formatDateLong, formatDate, 
+    getDateTimeRangeDescription, includeClauses, numberClause, stringClause, getTimeRangeText, autoCompleteOnFilter, 
+    buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray }

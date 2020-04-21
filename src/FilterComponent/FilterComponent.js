@@ -1,4 +1,5 @@
 import BaseComponent  from '../BaseComponent';
+import {autoCompleteOnFilter} from '../biq-app';
 import _filterComponentTemplate from './FilterComponent.html';
 import TimeRangeComponent from '../TimeRangeComponent/TimeRangeComponent';
 
@@ -27,18 +28,20 @@ export default class FilterComponent extends BaseComponent {
         var options = this.getOptions();
         this.template = $.templates(options.template);
         $("#" + options.targetId).html(this.template.render(options));
+        let timeSelector = this.getTimeSelector();
         options.filters.forEach(function (filter) {
             if (filter.query) {
                 autoCompleteOnFilter(
                     "#" + filter.id,
                     filter.query,
                     filter.adqlField,
+                    timeSelector,
                     function (selection) { }
                 );
             }
         });
 
-        $("#_submitFilter").on("click", function () {
+        $("#"+ options.targetId+"_submitFilter").on("click", function () {
             var results = [];
             options.filters.forEach(function (filter) {
                 var value = $("#" + filter.id).val();
@@ -51,7 +54,7 @@ export default class FilterComponent extends BaseComponent {
                 onClick(fc._biqFilters);
             }
         });
-        $("#_resetFilter").on("click", function () {
+        $("#"+ options.targetId+"_resetFilter").on("click", function () {
             options.filters.forEach(function (filter) {
                 $("#" + filter.id).val("");
             });
@@ -61,16 +64,21 @@ export default class FilterComponent extends BaseComponent {
             callback(options);
         }
         
-        _drawFilterComponent();
+        this._drawFilterComponent(options);
+    }
+
+    getTimeSelector(){
+        return this.getOptions().targetId+"_time_timeRange";
     }
 
     updateQuery(query) {
         return this.updateQueryWithFilters(query);
     }
 
-    _drawFilterComponent(){
+    _drawFilterComponent(options){
         new TimeRangeComponent({
-            targetId: "_timeSelector"
+            targetId: this.getOptions().targetId+"_time"
         }).draw();
     }
+
 }

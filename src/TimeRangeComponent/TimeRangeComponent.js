@@ -9,17 +9,22 @@ export default class TimeRangeComponent extends BaseComponent {
     super(options);
   }
 
+  getTimeSelector(){
+    return this.options.targetId+"_timeRange";
+  }
+
   draw(onClick, callback) {
     var options = this.getOptions();
     this.template = $.templates(options.template);
     $("#" + options.targetId).html(this.template.render(options));
-    $("#ACAP_timeRange").on("change", function () {
+    let timeSelector = this.getTimeSelector();
+    $("#"+timeSelector).on("change", function () {
       if (onClick) {
         onClick({
-          timebucket: getTimeBucket(),
-          text: getTimeRangeText(),
-          start: getTimeRange().start,
-          end: getTimeRange().end
+          timebucket: getTimeBucket(timeSelector),
+          text: getTimeRangeText(timeSelector),
+          start: getTimeRange(timeSelector).start,
+          end: getTimeRange(timeSelector).end
         });
       }
     });

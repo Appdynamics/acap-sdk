@@ -10,9 +10,9 @@ export default class FilterDateRangeComponent extends FilterComponent {
         this._biqFilters = [];
     }
 
-    _drawFilterComponent(){
+    _drawFilterComponent(options){
         new DateTimeRangeComponent({
-            targetId: "daterange_container"
+            targetId: options.targetId+"_daterange_container"
         }).draw();
     }
 }

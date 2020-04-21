@@ -42,9 +42,8 @@ export default class BaseComponent extends CoreComponent {
     _updateQuery(options, query) {
         var _biqFilters = [];
         if(this.filtercomponent) {
-
             _biqFilters = this.filtercomponent._biqFilters;
-
+            options.timeSelector = this.filtercomponent.getTimeSelector();
         }
         return biqUpdateQuery(options, query, _biqFilters);
     }
@@ -84,6 +83,7 @@ export default class BaseComponent extends CoreComponent {
             } else {
                 queryOptions.query = this._updateQuery(options, queryOptions.query);
             }
+            queryOptions.timeSelector = options.timeSelector;
             search(queryOptions, function (data) {
                 _render(
                     chart,
