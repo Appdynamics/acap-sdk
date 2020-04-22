@@ -3,7 +3,6 @@ import $ from 'jquery';
 import { getTimeBucket, getTimeRangeText, getTimeRange } from '../biq-app';
 import _dateRangeComponentTemplate from './DateTimeRangeComponent.html';
 import moment from 'moment';
-const COMP_SELECTOR = "#ACAP_daterange";
 
 export default class DateTimeRangeComponent extends BaseComponent {
     constructor(options) {
@@ -51,12 +50,22 @@ export default class DateTimeRangeComponent extends BaseComponent {
         drc.lastupdate = now;
     }
 
+    getTimeSelector(){
+        return this.getOptions().targetId+"_daterange";
+    }
+
+    getTimeRange(){
+        return this.timeRange;
+    }
+
     draw(onClick, callback) {
         var drc = this;
         var options = this.getOptions();
         this.template = $.templates(options.template);
         drc.lastupdate = moment();
-        $("#" + options.targetId).html(this.template.render(options));
+        let divSelector = "#" + options.targetId;
+        
+        $(divSelector).html(this.template.render(options));
         var now = moment();
         var ranges = {
             'Last 15 Minutes': [now.clone().subtract(15, 'minutes'), now],
@@ -87,24 +96,23 @@ export default class DateTimeRangeComponent extends BaseComponent {
 
         super.applyExtraOptions(pickerOptions);
 
-        $(COMP_SELECTOR).daterangepicker(pickerOptions, function (start, end, label) {
+        let inputSelect = this.getTimeSelector();
+        $("#"+inputSelect).daterangepicker(pickerOptions, function (start, end, label) {
             drc.timeRange.start = start.valueOf();
             drc.timeRange.end = end.valueOf();
-            //console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+            if (onClick) {
+                onClick({
+                  timebucket: drc.timeRange,
+                  text: label,
+                  start: drc.timeRange.start,
+                  end: drc.timeRange.start
+                });
+            }
         });
 
-        $(COMP_SELECTOR).on("change", function () {
-          if (onClick) {
-            onClick({
-              timebucket: getTimeBucket(COMP_SELECTOR),
-              text: getTimeRangeText(COMP_SELECTOR),
-              start: getTimeRange(COMP_SELECTOR).start,
-              end: getTimeRange(COMP_SELECTOR).end
-            });
-          }
-        });
         if (callback) {
             callback(options);
         }
+        return this;
     }
 }

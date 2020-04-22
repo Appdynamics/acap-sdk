@@ -62,7 +62,6 @@ function getTimeRangeBasedOnSelection(timeSelector) {
 
 
 function applyTimeBasedOnSelection(timeSelector,start) {
-    //var selection = $("#timeRange").val();
     var selection = $("#"+timeSelector).val();
     updateDateBasedOnSelection(start, selection)
     return start;
@@ -75,6 +74,9 @@ function applyTimeForSelection(start, selection) {
 
 
 function updateDateBasedOnSelection(start, selection) {
+    if(!selection){
+        return start;
+    }
     switch (selection) {
         case '1':
             start.setMinutes(start.getMinutes() - 1);

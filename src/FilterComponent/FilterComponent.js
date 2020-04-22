@@ -65,6 +65,8 @@ export default class FilterComponent extends BaseComponent {
         }
         
         this._drawFilterComponent(options);
+
+        return fc;
     }
 
     getTimeSelector(){

@@ -9,7 +9,6 @@ export default class BaseComponent extends CoreComponent {
     constructor(options, chart) {
         super(options)
         this.chart = chart;
-        this.filtercomponent = options.filtercomponent || null;
         if (this.options.preProcessFn) {
             this.preProcess = this.options.preProcessFn;
         }
@@ -40,10 +39,9 @@ export default class BaseComponent extends CoreComponent {
     }
 
     _updateQuery(options, query) {
-        var _biqFilters = [];
-        if(this.filtercomponent) {
-            _biqFilters = this.filtercomponent._biqFilters;
-            options.timeSelector = this.filtercomponent.getTimeSelector();
+        let _biqFilters = [];
+        if(options.filter) {
+            _biqFilters = options.filter._biqFilters;
         }
         return biqUpdateQuery(options, query, _biqFilters);
     }
@@ -77,13 +75,26 @@ export default class BaseComponent extends CoreComponent {
         callback
     ) {
         if (options.query) {
+
             var queryOptions = options.query;
+
             if (typeof queryOptions == "string") {
                 queryOptions = { query: this._updateQuery(options, options.query) };
             } else {
                 queryOptions.query = this._updateQuery(options, queryOptions.query);
             }
-            queryOptions.timeSelector = options.timeSelector;
+
+            /**
+             * time selector to determine the time range of the component
+             */
+            let filter = options.filter;
+            if(filter){
+                queryOptions.timeSelector = filter.getTimeSelector();
+                if(filter.getTimeRange){
+                    queryOptions.timeRange = filter.getTimeRange();
+                }
+            }
+
             search(queryOptions, function (data) {
                 _render(
                     chart,

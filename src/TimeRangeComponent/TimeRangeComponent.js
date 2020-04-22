@@ -31,5 +31,6 @@ export default class TimeRangeComponent extends BaseComponent {
     if (callback) {
       callback(options);
     }
+    return this;
   }
 }

@@ -68,7 +68,7 @@ var _debugCAP = true;
 var _debugTargetId = null;
 
 function appLogCompObject(comp, obj) {
-  if (_debugCAP) {
+  if (_debugCAP && comp) {
     if(!_debugTargetId && _debugTargetId != comp.getTargetId()){
       return;
     }
@@ -81,7 +81,7 @@ function appLogCompObject(comp, obj) {
 }
 
 function appLogCompMessage(comp, message) {
-  if (_debugCAP) {
+  if (_debugCAP && comp) {
     if(!_debugTargetId && _debugTargetId != comp.getTargetId()){
       return;
     }
@@ -99,7 +99,7 @@ var formatDateLong = function (d) {
 }
 
 function appLogMessage(message){
-  if(_debugCAP){
+  if(_debugCAP && message){
       console.log(message);
       if(message.start || message.end){
           console.log("start: "+formatDateLong(new Date(message.start))+" end: "+formatDateLong(new Date(message.end)));
@@ -108,7 +108,7 @@ function appLogMessage(message){
 }
 
 function appLogObject(obj){
-  if(_debugCAP){
+  if(_debugCAP && obj){
       console.log(JSON.stringify(obj));
       if(obj.start || obj.end){
           console.log("start: "+formatDateLong(new Date(obj.start))+" end: "+formatDateLong(new Date(obj.end)));
@@ -118,7 +118,7 @@ function appLogObject(obj){
 
 
 var biqUpdateQuery = function (options, query, filters) {
-  console.log(filters);
+  appLogObject(filters);
   if (options.ignoreFilters) {
     return query;
   } else {
