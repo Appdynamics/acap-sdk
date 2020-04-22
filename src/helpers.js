@@ -67,6 +67,11 @@ var animateDiv = function (div, animate) {
 var _debugCAP = false;
 var _debugTargetId = null;
 
+/**
+ * Allows logging of the internal components 
+ * @param {*} flag true/false will turn logging on/off, it is by default turned off
+ * @param {*} targetId if set it will only log debug statements from components with this targetId
+ */
 function logging(flag,targetId){
   _debugCAP = flag;
   _debugTargetId = targetId;
@@ -74,7 +79,7 @@ function logging(flag,targetId){
 
 function appLogCompObject(comp, obj) {
   if (_debugCAP && comp) {
-    if(!_debugTargetId && _debugTargetId != comp.getTargetId()){
+    if(_debugTargetId && _debugTargetId != comp.getTargetId()){
       return;
     }
     try {
@@ -87,7 +92,7 @@ function appLogCompObject(comp, obj) {
 
 function appLogCompMessage(comp, message) {
   if (_debugCAP && comp) {
-    if(!_debugTargetId && _debugTargetId != comp.getTargetId()){
+    if(_debugTargetId && _debugTargetId != comp.getTargetId()){
       return;
     }
     try {
