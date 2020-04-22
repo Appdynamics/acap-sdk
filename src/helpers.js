@@ -64,8 +64,13 @@ var animateDiv = function (div, animate) {
 };
 
 
-var _debugCAP = true;
+var _debugCAP = false;
 var _debugTargetId = null;
+
+function logging(flag,targetId){
+  _debugCAP = flag;
+  _debugTargetId = targetId;
+}
 
 function appLogCompObject(comp, obj) {
   if (_debugCAP && comp) {
@@ -210,4 +215,4 @@ var roundValue = function (value) {
 
 
 
-export { roundValue, hideElements, showElements, biqUpdateQuery, appLogCompObject, appLogCompMessage, appLogMessage, appLogObject, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv }
+export { roundValue, hideElements, showElements, biqUpdateQuery, logging, appLogCompObject, appLogCompMessage, appLogMessage, appLogObject, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv }

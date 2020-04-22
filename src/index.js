@@ -16,7 +16,7 @@ import { BarChartComponent, BarChart} from './BarChartComponent/BarChartComponen
 import BoxComponent from './BoxComponent/BoxComponent';
 import DropList from './DropList/DropList';
 
-import  { hideElements, showElements, biqUpdateQuery, appLogCompObject, appLogCompMessage, appLogMessage, appLogObject, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  } from './helpers';
+import  { logging, hideElements, showElements, biqUpdateQuery, appLogCompObject, appLogCompMessage, appLogMessage, appLogObject, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  } from './helpers';
 import { startDate, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, getTimeRange, getTimeRangeStartingFromDate, getTimeRangeBasedOnSelection, applyTimeBasedOnSelection,  applyTimeForSelection, getTimeBucket, updateDateBasedOnSelection, getTimeBucketAsMinutes, stopAnim, startAnim, replaceNulls,  postQuery, makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, endDate, copyTextToClipBoard, roundValue, escapeQuery, shortTime, formatDateLong, formatDate,getDateTimeRangeDescription, includeClauses, numberClause, stringClause, getTimeRangeText, autoCompleteOnFilter,buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray, openAdql} from './biq-app.js';
 
 import $ from 'jquery';
@@ -47,7 +47,7 @@ import multipleselect from '../node_modules/multiple-select/dist/multiple-select
 import multipleselectcss from '../node_modules/multiple-select/dist/multiple-select.min.css';
 import multipleselectbootstrapcss from '../node_modules/multiple-select/dist/themes/bootstrap.min.css';
 
-export { openAdql, Location, GeoMapComponent, DonutChart, DonutChartComponent, BarChartComponent, BarChart, BoxComponent, FilterComponent, FilterDateRangeComponent, Table, TableComponent, 
+export { logging, openAdql, Location, GeoMapComponent, DonutChart, DonutChartComponent, BarChartComponent, BarChart, BoxComponent, FilterComponent, FilterDateRangeComponent, Table, TableComponent, 
         PieChart, PieChartComponent, BoxChartComponent, BaseComponent, CustomComponent, 
         TimeChartComponent, TimeChart, SankeyChart,TimeRangeComponent, DateTimeRangeComponent, TimeLineComponent, DropList,
         biqUpdateQuery, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv,
