@@ -1,125 +1,174 @@
 import $ from 'jquery';
+var generateRandomTimeData = function (max, intervals, bucket, xmin, xmax) {
+  if (!max) {
+    max = 1000; //max y value
+  }
+  if (!intervals) {
+    intervals = 14; //two weeks
+  }
+  if (!bucket) {
+    bucket = "days"; // time interval is days
+  }
 
-var generateRandomTimeData = function(max, intervals, bucket, xmin, xmax) {
-    if(!max){
-      max = 1000; //max y value
-    }
-    if(!intervals){
-      intervals = 14; //two weeks
-    }
-    if(!bucket){
-      bucket = "days"; // time interval is days
-    }
-  
-    if(!xmin){
-      xmin =0;
-    }
-  
-    if(!xmax){
-      xmax =0;
-    }
-  
-    var date = new Date();
-    var results = [];
-    for (var i = 0; i < intervals; i++) {
-      results.push([date.getTime(), Math.floor(Math.random() * max)]);
-      if(bucket == "mins")
-        date.setMinutes(date.getMinutes() - 1);
-      if(bucket == "hrs")
-        date.setHours(date.getHours() - 1);
-      if(bucket == "days")
-        date.setDate(date.getDate() - 1);
-    }
-  
-    if(xmin > 0){
-      for(i=intervals-1; i >= (intervals-xmin) ; i--){
-          var rec = results[i];
-          rec[1] = 0;
-      }
-    }
-  
-    if(xmax != intervals){
-      for(i=0; i < xmax ; i++){
-          var rec = results[i];
-          rec[1] = 0;
-      }
-    }
-  
-    return results;
-  };
-  
-  var generateColumnData = function () {
-    return [
-      ["Normal", 1000],
-      ["Slow", 2000],
-      ["Very Slow", 3000],
-      ["Error", 4000],
-      ["Stall", 500]
-    ];
-  };
-  
-  var defaultColorPattern = ['#2ca02c', '#1f77b4', '#ff7f0e', '#d62728', '#9467bd'];
-  
-  var animateDiv = function (div, animate) {
-    $("#" + div).addClass("animated " + animate);
-  };
+  if (!xmin) {
+    xmin = 0;
+  }
 
-  
-var _debugBiQAppCharts = true;
+  if (!xmax) {
+    xmax = 0;
+  }
 
-  function debug(comp, message) {
-    if (_debugBiQAppCharts) {
-      try {
-        console.log(comp.getDivId() + " : " + message);
-      } catch (error) {
-        console.log(message);
-      }
+  var date = new Date();
+  var results = [];
+  for (var i = 0; i < intervals; i++) {
+    results.push([date.getTime(), Math.floor(Math.random() * max)]);
+    if (bucket == "mins")
+      date.setMinutes(date.getMinutes() - 1);
+    if (bucket == "hrs")
+      date.setHours(date.getHours() - 1);
+    if (bucket == "days")
+      date.setDate(date.getDate() - 1);
+  }
+
+  if (xmin > 0) {
+    for (i = intervals - 1; i >= (intervals - xmin); i--) {
+      var rec = results[i];
+      rec[1] = 0;
     }
   }
 
+  if (xmax != intervals) {
+    for (i = 0; i < xmax; i++) {
+      var rec = results[i];
+      rec[1] = 0;
+    }
+  }
+
+  return results;
+};
+
+var generateColumnData = function () {
+  return [
+    ["Normal", 1000],
+    ["Slow", 2000],
+    ["Very Slow", 3000],
+    ["Error", 4000],
+    ["Stall", 500]
+  ];
+};
+
+var defaultColorPattern = ['#2ca02c', '#1f77b4', '#ff7f0e', '#d62728', '#9467bd'];
+
+var animateDiv = function (div, animate) {
+  $("#" + div).addClass("animated " + animate);
+};
+
+
+var _debugCAP = false;
+var _debugTargetId = null;
+
+/**
+ * Allows logging of the internal components 
+ * @param {*} flag true/false will turn logging on/off, it is by default turned off
+ * @param {*} targetId if set it will only log debug statements from components with this targetId
+ */
+function logging(flag,targetId){
+  _debugCAP = flag;
+  _debugTargetId = targetId;
+}
+
+function appLogCompObject(comp, obj) {
+  if (_debugCAP && comp) {
+    if(_debugTargetId && _debugTargetId != comp.getTargetId()){
+      return;
+    }
+    try {
+      console.log(comp.getDivId() + " object : " + JSON.stringify(obj));
+    } catch (error) {
+      console.log(obj);
+    }
+  }
+}
+
+function appLogCompMessage(comp, message) {
+  if (_debugCAP && comp) {
+    if(_debugTargetId && _debugTargetId != comp.getTargetId()){
+      return;
+    }
+    try {
+      console.log(comp.getDivId() + " : " + message);
+    } catch (error) {
+      console.log(message);
+    }
+  }
+}
+
+var formatDateLong = function (d) {
+  var datestring = ("0" + (d.getMonth() + 1)).slice(-2) + "/" + ("0" + d.getDate()).slice(-2) + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2) + ":" + ("0" + d.getSeconds()).slice(-2);
+  return datestring;
+}
+
+function appLogMessage(message){
+  if(_debugCAP && message){
+      console.log(message);
+      if(message.start || message.end){
+          console.log("start: "+formatDateLong(new Date(message.start))+" end: "+formatDateLong(new Date(message.end)));
+      }
+  }
+}
+
+function appLogObject(obj){
+  if(_debugCAP && obj){
+      console.log(JSON.stringify(obj));
+      if(obj.start || obj.end){
+          console.log("start: "+formatDateLong(new Date(obj.start))+" end: "+formatDateLong(new Date(obj.end)));
+      }
+  }
+}
+
 
 var biqUpdateQuery = function (options, query, filters) {
-  console.log(filters);
-    if (options.ignoreFilters) {
-        return query;
-    } else {
-        if (filters && filters.length > 0) {
-            var orderByPos = query.toLowerCase().indexOf("order by");
-            var preQuery, postQuery = "";
+  appLogObject(filters);
+  if (options.ignoreFilters) {
+    return query;
+  } else {
+    if (filters && filters.length > 0) {
+      var orderByPos = query.toLowerCase().indexOf("order by");
+      var preQuery, postQuery = "";
 
-            if (orderByPos > 0) {
-                preQuery = query.substring(0, orderByPos);
-                postQuery = query.substring(orderByPos, query.length);
-            } else {
-                preQuery = query;
-            }
-            var hasWhere = false;
-            if (preQuery.toLowerCase().indexOf("where") > 0) {
-                hasWhere = true;
-            }
+      if (orderByPos > 0) {
+        preQuery = query.substring(0, orderByPos);
+        postQuery = query.substring(orderByPos, query.length);
+      } else {
+        preQuery = query;
+      }
+      var hasWhere = false;
+      if (preQuery.toLowerCase().indexOf("where") > 0) {
+        hasWhere = true;
+      }
 
-            if (!hasWhere) {
-                preQuery += " WHERE ";
-            }
+      if (!hasWhere) {
+        preQuery += " WHERE ";
+      }
 
-            for (let index = 0; index < filters.length; index++) {
-                const filter = filters[index];
-                if (!hasWhere && index == 0) {
-                    preQuery += filter.field + " = '" + filter.value + "'";
-                } else {
-                    preQuery += " AND " + filter.field + " = '" + filter.value + "'";
-                }
-            }
-
-            if (postQuery.length > 1) {
-                return preQuery + " " + postQuery;
-            } else {
-                return preQuery;
-            }
+      for (let index = 0; index < filters.length; index++) {
+        const filter = filters[index];
+        if (!hasWhere && index == 0) {
+          preQuery += filter.field + " = '" + filter.value + "'";
         } else {
-            return query;
+          preQuery += " AND " + filter.field + " = '" + filter.value + "'";
         }
+      }
+
+      if (postQuery.length > 1) {
+        return preQuery + " " + postQuery;
+      } else {
+        return preQuery;
+      }
+    } else {
+      return query;
     }
+  }
 }
 
 var SI_PREFIXES = ["", "K", "M", "G", "T", "P", "E"];
@@ -165,10 +214,10 @@ var showElements = function (elems) {
 }
 
 
-var roundValue = function(value){
+var roundValue = function (value) {
   return Math.round(value * 10) / 10;
 }
 
 
 
-export {  roundValue, hideElements, showElements, biqUpdateQuery, debug, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  }
+export { roundValue, hideElements, showElements, biqUpdateQuery, logging, appLogCompObject, appLogCompMessage, appLogMessage, appLogObject, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv }

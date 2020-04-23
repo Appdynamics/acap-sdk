@@ -1,6 +1,6 @@
 import CoreComponent  from './CoreComponent';
 import nopaneltemplate from './noPanelComponent.html';
-import { debug } from './helpers';
+
 export default class BaseChart extends CoreComponent {
     constructor(options) {
       super(options);
@@ -8,7 +8,7 @@ export default class BaseChart extends CoreComponent {
       this.updateDivs(options);
       this.options = options;
       var template = options.template ? options.template : nopaneltemplate;
-      debug(this, "chart template : " + template);
+      super.debugMessage("chart template : " + template);
       try {
         this.template = $.templates(template);
       } catch (error) {
@@ -28,14 +28,14 @@ export default class BaseChart extends CoreComponent {
       if (this.isAnimation()) {
         var animateOption = this.getOptions().animate;
         if (animateOption) {
-          debug("animating " + this.getDivId() + " : " + animateOption);
+          super.debugMessage("animating " + this.getDivId() + " : " + animateOption);
           animateDiv(this.getDivId(), animateOption);
         }
       }
     }
   
     getTypeOverride() {
-      var chartOptions = this.getChartOptions();
+      var chartOptions = this.getExtraOptions();
       if (chartOptions && chartOptions.type) {
         return chartOptions.type;
       } else {
@@ -49,10 +49,10 @@ export default class BaseChart extends CoreComponent {
         options.div = options.parentDiv + "-chart";
       }
     }
-  
+
     renderOuterComponent(template) {
       if (!$("#" + this.getDivId()).length && this.options.parentDiv) {
-        debug(this, "Rendering template to div : " + this.options.parentDiv);
+        super.debugMessage("Rendering template to div : " + this.options.parentDiv);
         $("#" + this.options.parentDiv).html(template.render(this.options));
       }
     }
@@ -79,15 +79,6 @@ export default class BaseChart extends CoreComponent {
       $(this.getDiv()).show();
     }
   
-    updateChartOptions(chartOptions) {
-      var overrideOptions = this.getChartOptions();
-      if (overrideOptions) {
-        for (var key in overrideOptions) {
-          chartOptions[key] = overrideOptions[key];
-        }
-      }
-    }
-  
     renderChart(data, clickFunction) {
       //implemented by subclasses
     }
@@ -97,6 +88,7 @@ export default class BaseChart extends CoreComponent {
       if (callback) {
         callback(this.options);
       }
+      return this;
     }
   }
   

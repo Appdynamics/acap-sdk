@@ -18,7 +18,7 @@ export default class TimeLineComponent extends BaseChart {
       const nCategories = Math.ceil(Math.random()*MAXCATEGORIES),
       categoryLabels = ['Normal','Slow','Very Slow','Stall','Error'];
   
-      var chartOptions = super.getChartOptions();
+      var chartOptions = super.getExtraOptions();
       
       var groupLabels = chartOptions.groupLabels;
       if(!groupLabels){
@@ -110,7 +110,7 @@ export default class TimeLineComponent extends BaseChart {
         data = this.generateSampleData();
       }
   
-      var chartOptions = super.getChartOptions();
+      var chartOptions = super.getExtraOptions();
   
       TimelinesChart()(document.getElementById(id))
       .maxLineHeight(chartOptions.maxLineHeight)

@@ -190,7 +190,8 @@ class GeoMapComponent extends BaseChart {
             clickFunction(locationId, gmc.filter);
         });
 
-        super.updateChartOptions(options);
+        super.applyExtraOptions(options);
+
         this.drawModels(data);
 
         this.map.featureGroup = this.locationFeatureGroup;

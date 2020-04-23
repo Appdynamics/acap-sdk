@@ -33,7 +33,10 @@
     "popper.js": "^1.16.1",
     "q": "^1.5.1",
     "timelines-chart": "2.8.4",
-    "topojson-client": "^3.1.0"
+    "topojson-client": "^3.1.0",
+    "multiple-select": "^1.5.2",
+    "daterangepicker": "^3.0.5",
+    "jquery-ui": "^1.12.1"
   },
   "devDependencies": {
     "css-loader": "^3.4.2",

@@ -1,6 +1,6 @@
 import BaseChart from '../BaseChart';
-import { debug } from '../helpers';
 import bb from 'billboard.js';
+
 export default class GaugeChart extends BaseChart {
     constructor(options) {
       super(options);
@@ -16,7 +16,6 @@ export default class GaugeChart extends BaseChart {
           type: "gauge",
           onclick: function (d, i) {
             if (clickFunction) {
-              debug(this, JSON.stringify(d));
               clickFunction(d);
             }
           }
@@ -24,7 +23,8 @@ export default class GaugeChart extends BaseChart {
         legend: { show: true }
       };
   
-      super.updateChartOptions(chartOptions);
+      super.applyExtraOptions(chartOptions);
+
       this.chart = bb.generate(chartOptions);
       super.show();
       super.animate();

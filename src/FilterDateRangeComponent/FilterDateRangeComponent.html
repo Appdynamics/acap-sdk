@@ -1,7 +1,7 @@
 <li class="sidebar-search">
     <div class="form-group">
-        <label>Time Range:</label>
-        <span id="{{:targetId}}_time"></span>
+        <label>Date Range:</label>
+        <div class="form-group" id="{{:targetId}}_daterange_container"></div>
     </div>
     {{for filters}}
         <div class="form-group">
@@ -10,6 +10,6 @@
         </div>
     {{/for}}
     <div class="btn-group">
-        <button type="submit" class="btn btn-primary" id="{{:targetId}}_resetFilter">Reset</button> &nbsp;<button type="submit" class="btn btn-primary" id="{{:targetId}}_submitFilter">Query</button>
+        <button type="submit" class="btn btn-primary" id="_resetFilter">Reset</button> &nbsp;<button type="submit" class="btn btn-primary" id="_submitFilter">Query</button>
     </div>
 </li>
