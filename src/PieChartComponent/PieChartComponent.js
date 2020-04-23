@@ -4,6 +4,9 @@ import { generateColumnData } from '../helpers';
 import _chartComponentTemplate from '../chartComponentTemplate.html';
 import bb from 'billboard.js';
 
+
+import cavnaspiechartcss from './CanvasPieChart.css';
+
 class PieChartComponent extends BaseComponent {
     constructor(options) {
         options.template = _chartComponentTemplate;
@@ -49,4 +52,81 @@ class PieChart extends BaseChart {
         super.animate();
     }
 }
-export { PieChart, PieChartComponent }
+
+
+
+class CanvasPieChart {
+    constructor(options) {
+      this.options = options;
+  
+  
+    }
+  
+    draw() {
+  
+  
+      var colors = ['#00D270', '#FFD00E', '#FF7F32', '#8415A6', '#F0203A'];
+      if(this.options.colors) {
+          colors = this.options.colors;
+      }
+      this.options.size = this.options.size <= 1 ? 2 : this.options.size;
+      var sumOfAngles = 2 * Math.PI;//2pi is 360 degrees;
+      var canvas = document.getElementById(this.options.targetId);
+      var angles = [];
+      var data = this.options.data;
+      var datatotal = 0;
+      for (var i = 0; i < data.length; i++) {
+        datatotal += data[i][1];
+        angles.push(sumOfAngles / 100 * data[i][1]);
+      }
+  
+      var ctx = canvas.getContext('2d');
+      var beginAngle = 3 * 2 / 4 * Math.PI;
+      var endAngle = 3 * 2 / 4 * Math.PI;
+      if (Number.isNaN(datatotal)) {
+        ctx.beginPath();
+  
+        // Same code as before
+        ctx.moveTo(this.options.size, this.options.size);
+        ctx.arc(this.options.size, this.options.size, this.options.size - 1, 0, 2* Math.PI);
+        ctx.lineTo(this.options.size, this.options.size);
+        ctx.closePath();
+        ctx.stroke();
+        // Fill color
+        ctx.fillStyle = '#2151A1';
+  
+  
+        // Fill
+        ctx.fill();
+        return;
+  
+      }
+      for (var i = 0; i < angles.length; i++) {
+        beginAngle = endAngle;
+        endAngle = endAngle + angles[i];
+        
+        if (angles[i] > 0) {
+          ctx.beginPath();
+  
+          // Same code as before
+          ctx.moveTo(this.options.size, this.options.size);
+          ctx.arc(this.options.size, this.options.size, this.options.size - 1, beginAngle, endAngle);
+          ctx.lineTo(this.options.size, this.options.size);
+          ctx.closePath();
+          ctx.stroke();
+          // Fill color
+          ctx.fillStyle = colors[i % colors.length];
+  
+  
+          // Fill
+          ctx.fill();
+  
+        }
+  
+  
+      }
+  
+    }
+  
+  }
+export { PieChart, PieChartComponent, CanvasPieChart }

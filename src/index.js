@@ -1,7 +1,7 @@
 import  BaseComponent  from './BaseComponent';
 import  CustomComponent  from './CustomComponent/CustomComponent';
 import BoxChartComponent from './BoxChartComponent/BoxChartComponent';
-import { PieChart, PieChartComponent } from './PieChartComponent/PieChartComponent';
+import { CanvasPieChart, PieChart, PieChartComponent } from './PieChartComponent/PieChartComponent';
 import { Table, TableComponent} from './TableComponent/TableComponent';
 import { DonutChart, DonutChartComponent} from './DonutChartComponent/DonutChartComponent';
 import { TimeChart, TimeChartComponent} from './TimeChartComponent/TimeChartComponent';
@@ -14,6 +14,7 @@ import TimeLineComponent from './TimeLineComponent/TimeLineComponent';
 import { Location, GeoMapComponent} from './GeoMapComponent/GeoMapComponent';
 import { BarChartComponent, BarChart} from './BarChartComponent/BarChartComponent';
 import BoxComponent from './BoxComponent/BoxComponent';
+import HorizontalBarComponent from './HorizontalBarComponent/HorizontalBarComponent';
 import DropList from './DropList/DropList';
 
 import  { logging, hideElements, showElements, biqUpdateQuery, appLogCompObject, appLogCompMessage, appLogMessage, appLogObject, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  } from './helpers';
@@ -42,12 +43,11 @@ import bbcss from '../node_modules/billboard.js/dist/billboard.min.css';
 import bootstrap from '../node_modules/bootstrap/dist/js/bootstrap.min.js';
 import bootstrapcss from '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import appdynamics_bootstrap_css from './css/appdynamics_bootstrap.css';
-
 import multipleselect from '../node_modules/multiple-select/dist/multiple-select.min.js';
 import multipleselectcss from '../node_modules/multiple-select/dist/multiple-select.min.css';
 import multipleselectbootstrapcss from '../node_modules/multiple-select/dist/themes/bootstrap.min.css';
 
-export { logging, openAdql, Location, GeoMapComponent, DonutChart, DonutChartComponent, BarChartComponent, BarChart, BoxComponent, FilterComponent, FilterDateRangeComponent, Table, TableComponent, 
+export { logging, CanvasPieChart, HorizontalBarComponent, openAdql, Location, GeoMapComponent, DonutChart, DonutChartComponent, BarChartComponent, BarChart, BoxComponent, FilterComponent, FilterDateRangeComponent, Table, TableComponent, 
         PieChart, PieChartComponent, BoxChartComponent, BaseComponent, CustomComponent, 
         TimeChartComponent, TimeChart, SankeyChart,TimeRangeComponent, DateTimeRangeComponent, TimeLineComponent, DropList,
         biqUpdateQuery, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv,
