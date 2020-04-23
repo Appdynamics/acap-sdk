@@ -17,4 +17,13 @@ Running
 ```
 npm version patch -m "Upgrade to %s for reasons"
 ```
-Will update to a new minor version.  
+Will update to a new patch version.  
+
+Major versions can be created by manually using the git tag.  After commiting all the changes and updating the package.json with the correct version, run 
+```
+git tag -a v{Major}.{Minor}.{Patch} -m "Description"
+```
+Then run 
+```
+git push && git push --tags
+```
