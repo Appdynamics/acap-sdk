@@ -1,6 +1,6 @@
 {
   "name": "acap-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -8,7 +8,7 @@
     "build:back": "webpack --config webpack.config.backend.js",
     "prepare": "sass ./scss/appdynamics_bootstrap.scss ./src/css/appdynamics_bootstrap.css",
     "start:dev": "webpack-dev-server --open",
-    "start:back": "webpack-dev-server --open", 
+    "start:back": "webpack-dev-server --open",
     "git:pushtag": "git push && git push --tags",
     "version": "npm run build:front && npm run build:back && git add -A dist",
     "postversion": "git push && git push --tags"
