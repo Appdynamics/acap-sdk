@@ -4,7 +4,7 @@ SDK for Custom App Program Components
 ## Installation
 In your package.json add the following line to your list of dependencies
 ```
-"acap-sdk": "appdynamics/acap-sdk#master:^1.0.0",
+"acap-sdk": "https://github.com/Appdynamics/acap-sdk.git#v1.0.1"
 ```
 
 ## Usage
