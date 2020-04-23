@@ -2,6 +2,8 @@
 import BaseChart from '../BaseChart';
 import * as leafjs from 'leaflet';
 import leafcss from '../../node_modules/leaflet/dist/leaflet.css';
+import * as topojson from "topojson-client";
+import { getUSTopoJSON } from './GeoTopoJSON';
 var GREEN = "GREEN";
 var YELLOW = "#FFC300";
 var RED = "RED";
@@ -32,6 +34,15 @@ class GeoMapComponent extends BaseChart {
     constructor(options) {
         options.div = options.targetId;
         super(options);
+        if (options.drawModels) {
+            this.drawModels = options.drawModels;
+        }
+        if (options.renderChart) {
+            this.renderChart = options.renderChart;
+        }
+        if (options.popup) {
+            this.popup = options.popup;
+        }
 
 
         this.map = null;
@@ -88,13 +99,14 @@ class GeoMapComponent extends BaseChart {
     }
     resetToAverageLocation(zoom) {
         var compOptions = super.getOptions();
-        if(this.dataModels && this.dataModels.length > 0) {
+        if (this.dataModels && this.dataModels.length > 0) {
             var center = this.averageGeolocation(this.dataModels.map((loc) => {
                 return loc.GEO;
             }))
-    
+
             this.map.setView([center.LAT, center.LON], zoom || compOptions.zoom);
             this.map.fitBounds(this.locationFeatureGroup.getBounds());
+
         }
 
 
@@ -129,7 +141,47 @@ class GeoMapComponent extends BaseChart {
         }
 
         this.map = L.map(super.getOptions().div, { preferCanvas: true });
-        L.tileLayer(options.style, { minZoom: 1, maxZoom: 18, attribution: options.attribution }).addTo(this.map);
+        if (compOptions.mapstyle && compOptions.mapstyle.toUpperCase() === 'USGEO') {
+            L.TopoJSON = L.GeoJSON.extend({
+                addData: function (data) {
+                    var geojson, key;
+                    if (data.type === "Topology") {
+                        for (key in data.objects) {
+                            if (data.objects.hasOwnProperty(key)) {
+                                geojson = topojson.feature(data, data.objects[key]);
+                                L.GeoJSON.prototype.addData.call(this, geojson);
+                            }
+                        }
+                        return this;
+                    }
+                    L.GeoJSON.prototype.addData.call(this, data);
+                    return this;
+                }
+            });
+            L.topoJson = function (data, options) {
+                return new L.TopoJSON(data, options);
+            };
+
+            //create an empty geojson layer
+            //with a style and a popup on click
+            var geojson = L.topoJson(null, {
+                style: function (feature) {
+                    return {
+                        color: "#FFF",
+                        opacity: 1,
+                        weight: 1,
+                        fillColor: '#dbdfe2',
+                        fillOpacity: 0.8
+                    }
+                },
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<p>' + feature.properties.name + '</p>')
+                }
+            }).addTo(this.map);
+            geojson.addData(getUSTopoJSON());
+        } else {
+            L.tileLayer(options.style, { minZoom: 1, maxZoom: 18, attribution: options.attribution }).addTo(this.map);
+        }
         this.map.setView([options.lat, options.lng], options.zoom);
         this.locationFeatureGroup = L.featureGroup().addTo(this.map);
 
