@@ -1,8 +1,8 @@
 import CoreComponent from './CoreComponent';
-import { biqUpdateQuery, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  } from './helpers';
+import { biqUpdateQuery, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv } from './helpers';
 import $ from 'jquery';
 import { search } from './biq-app';
-import _chartComponentTemplate from './chartComponentTemplate.html';
+import _noPanelComponentTemplate from './noPanelComponent.html';
 require('jsrender')($);
 
 export default class BaseComponent extends CoreComponent {
@@ -18,9 +18,20 @@ export default class BaseComponent extends CoreComponent {
         if (this.options.postRenderFn) {
             this.postRender = this.options.postRenderFn;
         }
-        if (!options.template) {
-            options.template = _chartComponentTemplate;
-          }
+        
+        if (options.template) {
+            if (options.template.toLowerCase() === 'none') {
+                options.template = _noPanelComponentTemplate;
+            }
+        }
+
+        if (!options.style) {
+            options.cardStyle = "card";
+        } else {
+            if (options.style.toLowerCase() === 'none') {
+                options.cardStyle = null;
+            }
+        }
         if (this.chart) {
             this.chart.setAnimation(false);
         }
@@ -40,7 +51,7 @@ export default class BaseComponent extends CoreComponent {
 
     _updateQuery(options, query) {
         let _biqFilters = [];
-        if(options.filter) {
+        if (options.filter) {
             _biqFilters = options.filter._biqFilters;
         }
         return biqUpdateQuery(options, query, _biqFilters);
@@ -88,9 +99,9 @@ export default class BaseComponent extends CoreComponent {
              * time selector to determine the time range of the component
              */
             let filter = options.filter;
-            if(filter){
+            if (filter) {
                 queryOptions.timeSelector = filter.getTimeSelector();
-                if(filter.getTimeRange){
+                if (filter.getTimeRange) {
                     queryOptions.timeRange = filter.getTimeRange();
                 }
             }
@@ -188,12 +199,12 @@ export default class BaseComponent extends CoreComponent {
         } else {
             $("#" + options.targetId).html(
                 $.templates(options.template).render(options)
-              );
-              $("#" + options.targetId).click(function() {
+            );
+            $("#" + options.targetId).click(function () {
                 if (onClick) {
-                  onClick(data);
+                    onClick(data);
                 }
-              });
+            });
 
         }
 

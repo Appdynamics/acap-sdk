@@ -42,8 +42,10 @@ class PieChart extends BaseChart {
             legend: { show: true }
         };
 
-        if (!super.getExtraOptions().color) {
-            super.getExtraOptions().color = { pattern: defaultColorPattern };
+        var extraOptions = super.getExtraOptions();
+
+        if (extraOptions && !extraOptions.color) {
+            extraOptions.color = { pattern: defaultColorPattern };
         }
         super.applyExtraOptions(chartOptions);
 
