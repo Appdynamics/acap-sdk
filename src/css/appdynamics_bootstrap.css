@@ -10406,8 +10406,4 @@ input:checked + .slider:before {
   z-index: 10000;
 }
 
-.leaflet-pane.leaflet-overlay-pane > canvas {
-  background-color: white;
-}
-
 /*# sourceMappingURL=appdynamics_bootstrap.css.map */
