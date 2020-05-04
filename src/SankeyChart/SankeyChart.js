@@ -30,8 +30,13 @@ export default class SankeyChart extends BaseChart {
         data = this.generateSampleData();
       }
       var chartOptions = this.getExtraOptions();
-      const width = chartOptions.width ||  964;
-      const height = chartOptions.height || 600;
+      let width = 800;
+      let height = 600;
+      if(chartOptions.size){
+        width = chartOptions.size.width;
+        height = chartOptions.size.height;
+      }
+
       //input/output/path
       let edgeColor =  chartOptions.pathColor || 'input';
       

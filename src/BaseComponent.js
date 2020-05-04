@@ -45,6 +45,10 @@ export default class BaseComponent extends CoreComponent {
         }
     }
 
+    select(path){
+        return $("#"+path);
+    }
+
     getChart() {
         return this.chart;
     }

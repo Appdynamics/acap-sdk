@@ -12,22 +12,16 @@ function updateGeoFilters(filter, element) {
     setTimeout(function () {
         geoMap.filter = filter;
         $('#' + filter + '-legend-filter').css('color', 'black');
-
         geoMap.drawModels();
     }, 10);
-
-
-
-
 }
+
 class Location {
     constructor(id, geo, zipcode) {
         this.id = id;
         this.GEO = geo;
         this.ZIPCODE = zipcode;
-
     }
-
 }
 
 class GeoMapComponent extends BaseChart {
@@ -43,10 +37,7 @@ class GeoMapComponent extends BaseChart {
         if (options.popup) {
             this.popup = options.popup;
         }
-
-
         this.map = null;
-
         //this.canvas = createCanvas(windowWidth-25-250,windowHeight-25).parent(options.div); 
         this.locationFeatureGroup = null;
         this.dataModels = [];
@@ -55,8 +46,6 @@ class GeoMapComponent extends BaseChart {
         this.markerLookup = {};
         this.myZoom = null;
         this.filter = 'testfilter';
-
-
 
     }
 
@@ -103,13 +92,9 @@ class GeoMapComponent extends BaseChart {
             var center = this.averageGeolocation(this.dataModels.map((loc) => {
                 return loc.GEO;
             }))
-
             this.map.setView([center.LAT, center.LON], zoom || compOptions.zoom);
             this.map.fitBounds(this.locationFeatureGroup.getBounds());
-
         }
-
-
     }
 
     renderChart(data, clickFunction) {
@@ -127,7 +112,6 @@ class GeoMapComponent extends BaseChart {
         if (!this.dataModels) {
             this.dataModels = data;
         }
-
 
         var style = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
         var osmAttrib = 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
@@ -187,7 +171,7 @@ class GeoMapComponent extends BaseChart {
 
         this.locationFeatureGroup.on('click', function (ev) {
             var locationId = ev.layer.locationId;
-            clickFunction(locationId, gmc.filter);
+            clickFunction(locationId, gmc.filter,ev);
         });
 
         super.applyExtraOptions(options);
@@ -199,9 +183,7 @@ class GeoMapComponent extends BaseChart {
         var gmc = this;
         if (compOptions.legend) {
             var legend = L.control({ position: 'bottomright' });
-
             legend.onAdd = function (map) {
-
                 var div = L.DomUtil.create('div', 'info legend');
 
                 div.innerHTML = compOptions.legend || `<div id="ts-map-legend" >
@@ -209,15 +191,10 @@ class GeoMapComponent extends BaseChart {
                                     <p><br/></p>
                                     <div onclick="updateGeoFilters('testfilter', this)" class="clickable" id="testfilter-legend-filter" style="color:black">Test Filter</div>
                                 </div>`;
-
                 return div;
             };
             legend.addTo(this.map);
         }
-
-
-
-
     }
 
     getColor(id) {
@@ -233,24 +210,17 @@ class GeoMapComponent extends BaseChart {
 
     drawModels(data) {
         var drawable_data = [];
-
-
         if (!data) {
             data = this.dataModels;
         } else {
             this.dataModels = data;
         }
         var color = RED;
-
         if (this.filter === "testfilter") {
             drawable_data = data.testfilter || data;
         }
-
-
         this.locationFeatureGroup.clearLayers();
         this.modelLookup = {};
-
-
         var myRenderer = L.canvas({ padding: 0.5 });
 
         var invalidZips = [];
@@ -258,7 +228,6 @@ class GeoMapComponent extends BaseChart {
         for (let r = 0; r < drawable_data.length; r++) {
             var location = drawable_data[r];
             var locationId = location.id;
-
 
             //var color =// this.getColor(location);
             var color = "BLUE";
@@ -273,44 +242,21 @@ class GeoMapComponent extends BaseChart {
                 this.markerLookup[locationId] = cm;
             }
         }
-
         this.map.invalidateSize();
-
     }
 
     popup(location) {
         var self = this;
         var marker = this.markerLookup[location.id];
-
-
         var id = location.id.toString().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/\s]/gi, '');
-
         var content = `<h5>ID - ${location.id} </h5><b>Zip:</b> ${location.ZIPCODE}<br/>`;
-
         var popup = L.popup({
             minWidth: 100,
             minHeight: 100
         })
             .setLatLng([location.GEO.LAT, location.GEO.LON])
             .setContent(content).openOn(self.map);
-
         self.map.flyTo([location.GEO.LAT, location.GEO.LON], self.map.getZoom());
-
-
-
-
-
-
-
-    }
-
-    showComponent(comp, x, y) {
-        var parentCanvas = select("#defaultCanvas0").parent();
-        var compElement = select("#" + comp.getOptions().targetId);
-        compElement.parent(parentCanvas);
-        compElement.position(x, y);
-        compElement.style('z-index', 10);
-        compElement.show();
     }
 }
 
