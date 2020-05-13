@@ -126,6 +126,7 @@ class GeoMapComponent extends BaseChart {
 
         this.map = L.map(super.getOptions().div, { preferCanvas: true });
         if (compOptions.mapstyle && compOptions.mapstyle.toUpperCase() === 'USGEO') {
+            $(this.map._container).addClass('whitebg');
             L.TopoJSON = L.GeoJSON.extend({
                 addData: function (data) {
                     var geojson, key;

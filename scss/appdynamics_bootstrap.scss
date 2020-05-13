@@ -363,6 +363,9 @@ input[type=search] {
 
     );
 }
+.whitebg {
+  background:white;
+}
 .pieMarkerContainer {
     flex-direction: column;
     display: flex;
@@ -519,7 +522,4 @@ input:checked + .slider:before {
     top: 4px;
     left: 4px;
     z-index:10000;
-  }
-  .leaflet-pane.leaflet-overlay-pane > canvas {
-    //background-color: white;
   }

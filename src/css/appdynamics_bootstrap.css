@@ -10246,6 +10246,10 @@ input[type=search] {
   background-image: conic-gradient(#F0203A calc(3.6deg * var(--error, 0)), #FF7F32 0 calc(3.6deg * var(--veryslow, 0)), #FFD00E 0 calc(3.6deg * var(--slow, 0)), #8415A6 0 calc(3.6deg * var(--stall, 0)), #00D270 0 calc(3.6deg * var(--normal, 100)));
 }
 
+.whitebg {
+  background: white;
+}
+
 .pieMarkerContainer {
   flex-direction: column;
   display: flex;
