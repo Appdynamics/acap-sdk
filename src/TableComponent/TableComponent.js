@@ -34,17 +34,19 @@ class Table extends BaseChart {
   
     clearSelection(){
       var id = this.getDiv();
+      var tablesvc = this;
       if ($.fn.DataTable.isDataTable(id)) {
         var table = $(id);
-        table.DataTable().$("tr.selected").removeClass("selected");
+        tablesvc.table.$("tr.selected").removeClass("selected");
       }
     }
   
     renderChart(data, clickFunction) {
+      var tablesvc = this;
       super.renderOuterComponent(this.template);
       super.setTitle(super.getOptions());
       var id = this.getDiv();
-      var table = $(id);
+      var $elem = $(id);
   
       if (!$.fn.DataTable.isDataTable(id)) {
         var initOptions = super.getOptions().options;
@@ -57,23 +59,22 @@ class Table extends BaseChart {
         initOptions.columns = super.getOptions().columns;
         initOptions.order = this.order;
   
-        table.DataTable(initOptions);
-        table.DataTable().on("click", 'tr[role="row"]', function () {
-          table
-            .DataTable()
+        tablesvc.table = $elem.DataTable(initOptions);
+        $elem.on("click", 'tr[role="row"]', function () {
+          tablesvc.table
             .$("tr.selected")
             .removeClass("selected");
           var tr = $(this);
           tr.toggleClass("selected");
-          var row = table.DataTable().row(tr);
+          var row = tablesvc.table.row(tr);
           if (clickFunction) {
             clickFunction(row.data());
           }
         });
       } else {
-        table.DataTable().clear();
-        table.DataTable().rows.add(data);
-        table.DataTable().draw();
+        tablesvc.table.clear();
+        tablesvc.table.rows.add(data);
+        tablesvc.table.draw();
       }
   
       if (super.getOptions().class) {
