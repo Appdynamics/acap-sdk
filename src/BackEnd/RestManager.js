@@ -74,7 +74,7 @@ export default class RestManager {
 
     getControllerUrl() {
         let url = this.config.controller;
-        if(url && url.toLowerCase().startWith("http")){
+        if(url && url.toLowerCase().startsWith("http")){
             return url;
         }
         return "https://" + this.config.controller;
