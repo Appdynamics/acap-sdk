@@ -26810,7 +26810,7 @@ class RestManager {
         return this.apiauth.access_token && this.apiauth.expires_at < now;
     }
     post(endpoint,data) {
-        var url = "https://" + this.config.controller + endpoint;
+        var url = this.getControllerUrl() + endpoint;
         var options = {
             headers: {
                 json: true,
@@ -26822,7 +26822,7 @@ class RestManager {
         return needle('post', url, data, options);
     }
     get(endpoint) {
-        var url = "https://" + this.config.controller + endpoint;
+        var url = this.getControllerUrl() + endpoint;
         var options = {
             headers: {
                 json: true,
@@ -26842,16 +26842,11 @@ class RestManager {
         } else {
             return this.post(endpoint, data)
         }
-
-
-
-
     }
     async generateToken() {
         var RM = this;
 
-
-        var url = "https://" + this.config.controller + `/controller/api/oauth/access_token`;
+        var url = this.getControllerUrl() + '/controller/api/oauth/access_token';
         var options = {
             headers: {
                 json: true,
@@ -26872,6 +26867,14 @@ class RestManager {
         RM.apiauth.expires_at = expirydate;
     }
 
+
+    getControllerUrl() {
+        let url = this.config.controller;
+        if(url && url.toLowerCase().startWith("http")){
+            return url;
+        }
+        return "https://" + this.config.controller;
+    }
 }
 
 

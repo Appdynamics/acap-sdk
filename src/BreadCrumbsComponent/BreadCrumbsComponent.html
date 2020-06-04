@@ -1,0 +1,7 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      {{for crumbs}}
+        <li class="breadcrumb-item {{if active}} active" aria-current="page" {{else}}"{{/if}}><a href="#" onClick="crumbLinkClicked('{{:name}}')">{{:name}}</a></li>
+      {{/for}}
+    </ol>
+  </nav>
