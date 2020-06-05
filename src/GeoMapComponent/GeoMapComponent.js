@@ -3,7 +3,7 @@ import BaseChart from '../BaseChart';
 import * as leafjs from 'leaflet';
 import leafcss from '../../node_modules/leaflet/dist/leaflet.css';
 import * as topojson from "topojson-client";
-import { getUSTopoJSON } from './GeoTopoJSON';
+import { getUSTopoJSON, getCanadaTopoJSON } from './GeoTopoJSON';
 var GREEN = "GREEN";
 var YELLOW = "#FFC300";
 var RED = "RED";
@@ -164,6 +164,7 @@ class GeoMapComponent extends BaseChart {
                 }
             }).addTo(this.map);
             geojson.addData(getUSTopoJSON());
+            geojson.addData(getCanadaTopoJSON());
         } else {
             L.tileLayer(options.style, { minZoom: 1, maxZoom: 18, attribution: options.attribution }).addTo(this.map);
         }

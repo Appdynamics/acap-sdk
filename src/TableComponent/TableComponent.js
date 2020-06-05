@@ -72,9 +72,12 @@ class Table extends BaseChart {
           }
         });
       } else {
-        tablesvc.table.clear();
-        tablesvc.table.rows.add(data);
-        tablesvc.table.draw();
+        if(tablesvc.table) {
+          tablesvc.table.clear();
+          tablesvc.table.rows.add(data);
+          tablesvc.table.draw();
+        }
+
       }
   
       if (super.getOptions().class) {
