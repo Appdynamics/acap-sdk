@@ -77,7 +77,6 @@ class Table extends BaseChart {
           tablesvc.table.rows.add(data);
           tablesvc.table.draw();
         }
-
       }
   
       if (super.getOptions().class) {

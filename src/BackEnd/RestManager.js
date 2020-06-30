@@ -65,6 +65,15 @@ export default class RestManager {
 
         }
         const resp = await needle('post', url, postdata, options);
+       
+        if(resp.statusCode >= 300){
+            console.log("options:");
+            console.log(JSON.stringify(options));
+            console.log("post:");
+            console.log(JSON.stringify(postdata));
+            
+            throw "Error Fetching Token : Resp Code :"+resp.statusCode+" Message: "+resp.statusMessage;
+        }
         RM.apiauth = JSON.parse(resp.body);
         var expirydate = new Date();
         expirydate.setSeconds(expirydate.getSeconds() + RM.apiauth.expires_in);

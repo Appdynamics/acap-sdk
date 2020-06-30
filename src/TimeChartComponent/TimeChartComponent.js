@@ -2,6 +2,7 @@
 import BaseChart from '../BaseChart';
 import BaseComponent  from '../BaseComponent';
 import _chartComponentTemplate from '../chartComponentTemplate.html';
+import {convertToGroupData} from '../biq-app';
 import bb from 'billboard.js';
 
 class TimeChart extends BaseChart {
