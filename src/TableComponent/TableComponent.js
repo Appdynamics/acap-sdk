@@ -72,6 +72,7 @@ class Table extends BaseChart {
           }
         });
       } else {
+        tablesvc.table = $elem.DataTable();
         tablesvc.table.clear();
         tablesvc.table.rows.add(data);
         tablesvc.table.draw();

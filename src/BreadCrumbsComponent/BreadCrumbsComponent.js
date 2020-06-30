@@ -23,15 +23,15 @@ export default class BreadCrumbsComponent extends BaseComponent {
         this.crumbs.forEach(crumb =>{
             crumb.active = false;
         })
-        if(this.lastCrumb != name){
-            this.crumbs.push({name:name,value:value,active:true});
-            this._redraw();
-            this.lastCrumb = name;
+        let newCrumb = {name:name,value:value,active:true};
+        if(this.lastCrumb && this.lastCrumb.name !== name){
+            this.lastCrumb = newCrumb;
         }
+        this.crumbs.push(newCrumb);
+        this._redraw();
     }
 
     removeCrumb(name){
-        //todo reset lastCrumb
         var newList = [];
         this.crumbs.some(function (crumb) {
             newList.push(crumb);
@@ -42,6 +42,9 @@ export default class BreadCrumbsComponent extends BaseComponent {
             return match;
         });
         this.crumbs = newList;
+        if(this.crumbs.length > 0){
+            this.lastCrumb = this.crumbs[this.crumbs.length-1];
+        }
         this._redraw();
     }
 

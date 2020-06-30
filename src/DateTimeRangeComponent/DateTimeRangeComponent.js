@@ -9,6 +9,7 @@ export default class DateTimeRangeComponent extends BaseComponent {
         options.template = _dateRangeComponentTemplate;
         super(options);
         this.timeRange = {
+            label: "Last 15 minutes",
             start: moment().subtract(15, 'minutes').valueOf(),
             end: moment().valueOf()
         }
