@@ -4,6 +4,7 @@ import * as leafjs from 'leaflet';
 import leafcss from '../../node_modules/leaflet/dist/leaflet.css';
 import * as topojson from "topojson-client";
 import { getUSTopoJSON, getCanadaTopoJSON } from './GeoTopoJSON';
+import { getCountriesTopoJSON } from './CountriesTopoJSON';
 var GREEN = "GREEN";
 var YELLOW = "#FFC300";
 var RED = "RED";
@@ -160,9 +161,12 @@ class GeoMapComponent extends BaseChart {
                     }
                 },
                 onEachFeature: function (feature, layer) {
-                    layer.bindPopup('<p>' + feature.properties.name + '</p>')
+                    layer.bindPopup('<p>' + feature.properties.name + '</p>');
+                    
                 }
             }).addTo(this.map);
+
+            geojson.addData(getCountriesTopoJSON());
             geojson.addData(getUSTopoJSON());
             geojson.addData(getCanadaTopoJSON());
         } else {
@@ -173,7 +177,7 @@ class GeoMapComponent extends BaseChart {
 
         this.locationFeatureGroup.on('click', function (ev) {
             var locationId = ev.layer.locationId;
-            clickFunction(locationId, gmc.filter,ev);
+            clickFunction(locationId, gmc.filter, ev);
         });
 
         super.applyExtraOptions(options);

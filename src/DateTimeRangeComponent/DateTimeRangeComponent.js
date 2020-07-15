@@ -105,7 +105,7 @@ export default class DateTimeRangeComponent extends BaseComponent {
                   timebucket: drc.timeRange,
                   text: label,
                   start: drc.timeRange.start,
-                  end: drc.timeRange.start
+                  end: drc.timeRange.end
                 });
             }
         });

@@ -39,6 +39,7 @@ import d3 from '../node_modules/d3/dist/d3.min.js';
 import bb from '../node_modules/billboard.js/dist/billboard.min.js';
 import bbcss from '../node_modules/billboard.js/dist/billboard.min.css';
 import bootstrap from '../node_modules/bootstrap/dist/js/bootstrap.min.js';
+import popper from '../node_modules/popper.js/dist/popper.min.js';
 import bootstrapcss from '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import appdynamics_bootstrap_css from './css/appdynamics_bootstrap.css';
 import multipleselect from '../node_modules/multiple-select/dist/multiple-select.min.js';

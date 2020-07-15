@@ -236,7 +236,6 @@
 "faye-websocket@0.11.3","Apache-2.0","https://github.com/faye/faye-websocket-node","https://github.com/faye/faye-websocket-node/raw/master/LICENSE.md","sockjs-client:acap-sdk"
 "figgy-pudding@3.5.2","ISC","https://github.com/npm/figgy-pudding","https://github.com/npm/figgy-pudding/raw/master/LICENSE.md","acap-sdk"
 "file-match@1.0.2","ISC","https://github.com/douzi8/file-match","https://github.com/douzi8/file-match","acap-sdk"
-"file-system@2.2.2","ISC","https://github.com/douzi8/file-system","https://github.com/douzi8/file-system","acap-sdk"
 "file-uri-to-path@1.0.0","MIT","https://github.com/TooTallNate/file-uri-to-path","https://github.com/TooTallNate/file-uri-to-path/raw/master/LICENSE","acap-sdk"
 "fill-range@4.0.0","MIT","https://github.com/jonschlinkert/fill-range","https://github.com/jonschlinkert/fill-range/raw/master/LICENSE","acap-sdk"
 "fill-range@7.0.1","MIT","https://github.com/jonschlinkert/fill-range","https://github.com/jonschlinkert/fill-range/raw/master/LICENSE","chokidar:acap-sdk"
