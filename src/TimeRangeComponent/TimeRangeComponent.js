@@ -13,6 +13,16 @@ export default class TimeRangeComponent extends BaseComponent {
     return this.options.targetId+"_timeRange";
   }
 
+  getTime(){
+    let timeSelector = this.getTimeSelector();
+    return {
+      timebucket: getTimeBucket(timeSelector),
+      text: getTimeRangeText(timeSelector),
+      start: getTimeRange(timeSelector).start,
+      end: getTimeRange(timeSelector).end
+    }
+  }
+
   draw(onClick, callback) {
     var options = this.getOptions();
     this.template = $.templates(options.template);

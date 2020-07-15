@@ -19,8 +19,15 @@ import DropList from './DropList/DropList';
 import BreadCrumbsComponent from './BreadCrumbsComponent/BreadCrumbsComponent';
 import DynamicComponent from './DynamicComponent/DynamicComponent';
 
-import  { logging, hideElements, showElements, biqUpdateQuery, appLogCompObject, appLogCompMessage, appLogMessage, appLogObject, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  } from './helpers';
-import { startDate, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, getTimeRange, getTimeRangeStartingFromDate, getTimeRangeBasedOnSelection, applyTimeBasedOnSelection,  applyTimeForSelection, getTimeBucket, updateDateBasedOnSelection, getTimeBucketAsMinutes, stopAnim, startAnim, replaceNulls,  postQuery, makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, endDate, copyTextToClipBoard, roundValue, escapeQuery, shortTime, formatDateLong, formatDate,getDateTimeRangeDescription, includeClauses, numberClause, stringClause, getTimeRangeText, autoCompleteOnFilter,buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray, openAdql} from './biq-app.js';
+import  { logging, hideElements, showElements, biqUpdateQuery, appLogCompObject, appLogCompMessage, appLogMessage, 
+        appLogObject, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  } from './helpers';
+import { startDate, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, getTimeRange, getTimeRangeStartingFromDate, 
+        getTimeRangeBasedOnSelection, applyTimeBasedOnSelection,  applyTimeForSelection, getTimeBucket, updateDateBasedOnSelection, 
+        getTimeBucketAsMinutes, stopAnim, startAnim, replaceNulls,  postQuery, makeGetCall, makePostCall, getHealthColor, lookup, 
+        lookupArray, endDate, copyTextToClipBoard, roundValue, escapeQuery, shortTime, formatDateLong, formatDate,getDateTimeRangeDescription, 
+        includeClauses, numberClause, stringClause, getTimeRangeText, autoCompleteOnFilter,buildQueryForAutoCompleteOnFilter, 
+        autoComplete, autoCompleteArray, openAdql,getGroupsFromDataSet,getGroupDataRecForDate,getGroupArrayJSON,getGroupArray,convertToGroupData,
+        mergeDataSets,search} from './biq-app.js';
 
 import $ from 'jquery';
 require('imports-loader?window.jQuery=jquery!../node_modules/jquery-ui/ui/widgets/autocomplete.js');
@@ -57,4 +64,5 @@ export { logging, CanvasPieChart, HorizontalBarComponent, openAdql, Location, Ge
         getTimeBucket, updateDateBasedOnSelection, getTimeBucketAsMinutes, stopAnim, startAnim, appLogMessage, appLogObject, appLogCompMessage, appLogCompObject, replaceNulls,  
         postQuery, makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, startDate, endDate, copyTextToClipBoard, 
         roundValue, escapeQuery, shortTime, formatDateLong, formatDate,getDateTimeRangeDescription, includeClauses, numberClause, 
-        stringClause, getTimeRangeText, autoCompleteOnFilter,buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray}
+        stringClause, getTimeRangeText, autoCompleteOnFilter,buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray,
+        getGroupsFromDataSet,getGroupDataRecForDate,getGroupArrayJSON,getGroupArray,convertToGroupData,mergeDataSets,search}
