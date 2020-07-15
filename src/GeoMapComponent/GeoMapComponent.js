@@ -4,7 +4,9 @@ import * as leafjs from 'leaflet';
 import leafcss from '../../node_modules/leaflet/dist/leaflet.css';
 import * as topojson from "topojson-client";
 import { getUSTopoJSON, getCanadaTopoJSON } from './GeoTopoJSON';
-import { getCountriesTopoJSON } from './CountriesTopoJSON';
+
+
+import { getGEOJSON } from './customGEO';
 var GREEN = "GREEN";
 var YELLOW = "#FFC300";
 var RED = "RED";
@@ -127,6 +129,7 @@ class GeoMapComponent extends BaseChart {
 
         this.map = L.map(super.getOptions().div, { preferCanvas: true });
         if (compOptions.mapstyle && compOptions.mapstyle.toUpperCase() === 'USGEO') {
+            
             $(this.map._container).addClass('whitebg');
             L.TopoJSON = L.GeoJSON.extend({
                 addData: function (data) {
@@ -161,12 +164,38 @@ class GeoMapComponent extends BaseChart {
                     }
                 },
                 onEachFeature: function (feature, layer) {
+                    var bounds = layer.getBounds && layer.getBounds();
+                    // The precision might need to be adjusted depending on your data
+                    if (bounds && (Math.abs(bounds.getEast() + bounds.getWest())) < 1) {
+                        var latlongs = layer.getLatLngs();
+                        latlongs.forEach(function (shape) {
+                            shape.forEach(function (cord) {
+                                if (cord.lng < 0) {
+                                    cord.lng += 360;
+                                }   
+                            }); 
+                        }); 
+                        layer.setLatLngs(latlongs);
+                   }
                     layer.bindPopup('<p>' + feature.properties.name + '</p>');
                     
                 }
             }).addTo(this.map);
 
-            geojson.addData(getCountriesTopoJSON());
+            L.geoJson(getGEOJSON(), {
+                clickable: false,
+                style: function (feature) {
+                    return {
+                        color: "#FFF",
+                        opacity: 1,
+                        weight: 1,
+                        fillColor: '#dbdfe2',
+                        fillOpacity: 0.8
+                    }
+                }
+            }).addTo(this.map);
+
+            //geojson.addData(getCountriesTopoJSON());
             geojson.addData(getUSTopoJSON());
             geojson.addData(getCanadaTopoJSON());
         } else {
