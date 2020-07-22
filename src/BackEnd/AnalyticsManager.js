@@ -70,14 +70,14 @@ export default class AnalyticsManager {
 
         needle.post(url, query, options, function (err, resp) {
                 
-            if (resp.statusCode >= 300) {
+            if (resp && resp.statusCode >= 300) {
                 err = resp.statusCode + ' ' + resp.statusMessage;
                 resp = null;
             } else {
                 try {
                     var resp = JSON.parse(resp.body.toString());
                 } catch (e) {
-                    err = e.message;
+                    //err = e.message;
                     resp = null;
                 }
             }
