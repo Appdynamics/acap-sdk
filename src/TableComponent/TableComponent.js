@@ -18,6 +18,10 @@ import tabletemplate from './Table.html';
     clearSelection(){
       this.getChart().clearSelection();
     }
+
+    data(records){
+      this.getChart().data(records);
+    }
   }
   
 class Table extends BaseChart {
@@ -39,6 +43,14 @@ class Table extends BaseChart {
         var table = $(id);
         tablesvc.table.$("tr.selected").removeClass("selected");
       }
+    }
+
+    data(records){
+      if(this.table){
+        this.table.clear();
+        this.table.rows.add(records);
+        this.table.draw();
+      }   
     }
   
     renderChart(data, clickFunction) {
@@ -72,7 +84,9 @@ class Table extends BaseChart {
           }
         });
       } else {
-        if(tablesvc.table) {
+        let table = $(id).DataTable();
+        if(table) {
+          tablesvc.table = table;
           tablesvc.table.clear();
           tablesvc.table.rows.add(data);
           tablesvc.table.draw();
