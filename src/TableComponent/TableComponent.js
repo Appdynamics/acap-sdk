@@ -30,10 +30,6 @@ class Table extends BaseChart {
         options.template = tabletemplate;
       }
       super(options);
-      this.order = options.order;
-      if (!this.order) {
-        this.order = [[options.columns.length - 1, "desc"]];
-      }
     }
   
     clearSelection(){
@@ -69,7 +65,9 @@ class Table extends BaseChart {
         }
         initOptions.data = data;
         initOptions.columns = super.getOptions().columns;
-        initOptions.order = this.order;
+        if(!initOptions.order){
+          initOptions.order = [[initOptions.columns.length - 1, "desc"]];
+        }
   
         tablesvc.table = $elem.DataTable(initOptions);
         $elem.on("click", 'tr[role="row"]', function () {
