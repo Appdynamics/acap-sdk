@@ -403,6 +403,25 @@ function makeGetCall(url, callback) {
     });
 }
 
+/**
+ * makes an ajax call and returns a callback passing results and any errors
+ * callback(results) if successfull
+ * callback(null,error) if an error occurred.
+ * @param {*} url 
+ * @param {*} callback 
+ */
+function ajaxCall(url, callback) {
+    appLogMessage(url);
+    $.ajax({
+        url: url,
+        method: "GET"
+    }).done(function (data) {
+        callback(data);
+    }).fail(function (jqXHR, message) {
+        callback(null,jqXHR.statusText + " : " + jqXHR.responseText);
+    });
+}
+
 
 function getHealthColor(health) {
     var COLOR_NORMAL = "#79DD1B";
