@@ -851,7 +851,7 @@ try {
 export { openAdql, search, searchRestUI, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, 
     getTimeRange, getTimeRangeStartingFromDate, getTimeRangeBasedOnSelection, applyTimeBasedOnSelection, 
     applyTimeForSelection, getTimeBucket, updateDateBasedOnSelection, getTimeBucketAsMinutes, stopAnim, 
-    startAnim, replaceNulls, postQuery, makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, 
+    startAnim, replaceNulls, postQuery, ajaxCall,makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, 
     startDate, endDate, copyTextToClipBoard, roundValue, escapeQuery, shortTime, formatDateLong, formatDate, 
     getDateTimeRangeDescription, includeClauses, numberClause, stringClause, getTimeRangeText, autoCompleteOnFilter, 
     buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray, getGroupsFromDataSet,getGroupDataRecForDate,getGroupArrayJSON,getGroupArray,convertToGroupData,mergeDataSets  }
