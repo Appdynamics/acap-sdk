@@ -9,14 +9,18 @@ export default class BreadCrumbsComponent extends BaseComponent {
         }
         this.crumbs = [];
         this._resetCrumbs(options.data);
-        this.lastCrumb = "";
+        this.lastCrumb;
         this.template = $.templates(options.template);
     }
 
     _resetCrumbs(data){
         data.forEach(crumb =>{
-            this.crumbs.push({name:crumb,active:false});
+            this.crumbs.push({name:crumb.name,value:crumb.value,active:false});
         });
+    }
+
+    getLastCrumb(){
+        return this.lastCrumb;
     }
 
     addCrumb(name,value){
@@ -24,9 +28,12 @@ export default class BreadCrumbsComponent extends BaseComponent {
             crumb.active = false;
         })
         let newCrumb = {name:name,value:value,active:true};
-        if(this.lastCrumb && this.lastCrumb.name !== name){
+        if(!this.lastCrumb){
+            this.lastCrumb = newCrumb;
+        } else if(this.lastCrumb.name !== name){
             this.lastCrumb = newCrumb;
         }
+        
         this.crumbs.push(newCrumb);
         this._redraw();
     }

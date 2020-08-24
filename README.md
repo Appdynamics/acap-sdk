@@ -13,6 +13,7 @@ Include "node_modules/acap-sdk/dist/app.js" in your website.
 See ... to see documentation on examples.
 
 ## Version Updates
+Note: Commit your changes first. No need to push.
 Running 
 ```
 npm version patch -m "Upgrade to %s for reasons"
