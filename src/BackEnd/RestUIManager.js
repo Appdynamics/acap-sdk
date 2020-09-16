@@ -1,4 +1,5 @@
 var needle = require("needle");
+const winston = require('winston');
 export default class RestUIManager {
     constructor(config) {
         this.config = config;

@@ -2,11 +2,29 @@
 var Q = require('q');
 var needle = require("needle");
 import { getStartTime, getEndTime } from './DateHelper.js';
+var util = require('util');
 var minErrorCode = 400;
+
+const winston = require('winston');
+ 
+
+ 
+
 export default class AnalyticsManager {
     constructor(config, limit) {
         this.config = config;
         this.limit = limit || 10;
+        this.logger = winston.createLogger({
+            level: config.loglevel || 'info',
+            format: winston.format.json(),
+            defaultMeta: { service: 'AnalyticsManager' },
+            transports: [
+              new winston.transports.File({ filename: 'error.log', level: 'error' }),
+              new winston.transports.File({ filename: 'combined.log' }),
+            ],
+          });
+
+
     }
     simpleQuery(query, callback) {
 
@@ -52,8 +70,9 @@ export default class AnalyticsManager {
        if(!limit) {
            limit = this.limit;
        }
-        
+      
         var url = this.config.analyticsUrl + "/events/query?start=" + start + "&end=" + end + "&limit=" + limit;
+        AM.logger.debug("Analytics URL", url);
         var options = {
             method: 'POST',
             headers: {
@@ -65,22 +84,31 @@ export default class AnalyticsManager {
                 "X-CSRF-TOKEN": "Content-type: application/vnd.appd.events+text;v=2"
             }
         };
-
+        AM.logger.debug("Analytics Request Options", options);
 
 
         needle.post(url, query, options, function (err, resp) {
-                
+            if(resp) {
+                AM.logger.debug("Analytics response", resp.body);
+            } else if(err) {
+                AM.logger.error("Analytics Manager Error when making request", err);
+            } else {
+                AM.logger.error('Missing Response: Both Error and Response are missing.');
+            }
+            
+
             if (resp && resp.statusCode >= 300) {
+                AM.logger.error("Analytics Manager Error when making request", resp);
                 err = resp.statusCode + ' ' + resp.statusMessage;
                 resp = null;
-            } else {
+            } else if(resp){
                 try {
                     var resp = JSON.parse(resp.body.toString());
                 } catch (e) {
                     //err = e.message;
                     resp = null;
                 }
-            }
+            } 
 
             AM.handleResponse(err, resp, callback);
         });
