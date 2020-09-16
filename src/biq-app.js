@@ -431,7 +431,7 @@ function ajaxCall(url, callback) {
  * @param {*} callback 
  */
 function ajaxCallWithOptions(options, callback) {
-    appLogMessage(url);
+    appLogMessage(options);
     $.ajax(options).done(function (data) {
         callback(data);
     }).fail(function (jqXHR, message) {
@@ -868,7 +868,7 @@ try {
 export { openAdql, search, searchRestUI, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, 
     getTimeRange, getTimeRangeStartingFromDate, getTimeRangeBasedOnSelection, applyTimeBasedOnSelection, 
     applyTimeForSelection, getTimeBucket, updateDateBasedOnSelection, getTimeBucketAsMinutes, stopAnim, 
-    startAnim, replaceNulls, postQuery, ajaxCall,makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, 
+    startAnim, replaceNulls, postQuery, ajaxCall, ajaxCallWithOptions, makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, 
     startDate, endDate, copyTextToClipBoard, roundValue, escapeQuery, shortTime, formatDateLong, formatDate, 
     getDateTimeRangeDescription, includeClauses, numberClause, stringClause, getTimeRangeText, autoCompleteOnFilter, 
     buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray, getGroupsFromDataSet,getGroupDataRecForDate,getGroupArrayJSON,getGroupArray,convertToGroupData,mergeDataSets  }
