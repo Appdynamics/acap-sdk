@@ -23,7 +23,7 @@ import  { logging, hideElements, showElements, biqUpdateQuery, appLogCompObject,
         appLogObject, abbreviateNumber, generateRandomTimeData, generateColumnData, animateDiv  } from './helpers';
 import { startDate, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, getTimeRange, getTimeRangeStartingFromDate, 
         getTimeRangeBasedOnSelection, applyTimeBasedOnSelection, applyTimeForSelection, getTimeBucket, updateDateBasedOnSelection, 
-        getTimeBucketAsMinutes, stopAnim, startAnim, replaceNulls, postQuery,ajaxCall,makeGetCall, makePostCall, getHealthColor, lookup, 
+        getTimeBucketAsMinutes, stopAnim, startAnim, replaceNulls, postQuery,ajaxCall, ajaxCallWithOptions, makeGetCall, makePostCall, getHealthColor, lookup, 
         lookupArray, endDate, copyTextToClipBoard, roundValue, escapeQuery, shortTime, formatDateLong, formatDate,getDateTimeRangeDescription, 
         includeClauses, numberClause, stringClause, getTimeRangeText, autoCompleteOnFilter,buildQueryForAutoCompleteOnFilter, 
         autoComplete, autoCompleteArray, openAdql,getGroupsFromDataSet,getGroupDataRecForDate,getGroupArrayJSON,getGroupArray,convertToGroupData,
@@ -62,7 +62,7 @@ export { logging, CanvasPieChart, HorizontalBarComponent, openAdql, Location, Ge
         hideElements, showElements, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, getTimeRange, 
         getTimeRangeStartingFromDate, getTimeRangeBasedOnSelection, applyTimeBasedOnSelection, applyTimeForSelection, 
         getTimeBucket, updateDateBasedOnSelection, getTimeBucketAsMinutes, stopAnim, startAnim, appLogMessage, appLogObject, appLogCompMessage, appLogCompObject, replaceNulls,  
-        postQuery, makeGetCall, ajaxCall,makePostCall, getHealthColor, lookup, lookupArray, startDate, endDate, copyTextToClipBoard, 
+        postQuery, makeGetCall, ajaxCall, ajaxCallWithOptions, makePostCall, getHealthColor, lookup, lookupArray, startDate, endDate, copyTextToClipBoard, 
         roundValue, escapeQuery, shortTime, formatDateLong, formatDate,getDateTimeRangeDescription, includeClauses, numberClause, 
         stringClause, getTimeRangeText, autoCompleteOnFilter,buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray,
         getGroupsFromDataSet,getGroupDataRecForDate,getGroupArrayJSON,getGroupArray,convertToGroupData,mergeDataSets,search}
