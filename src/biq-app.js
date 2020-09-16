@@ -422,6 +422,23 @@ function ajaxCall(url, callback) {
     });
 }
 
+/**
+ * makes an ajax call, allowing you to pass in options and returns a callback passing results and any errors
+ * options : javascript object e.g. {url: url,method: "GET"}
+ * callback(results) if successfull
+ * callback(null,error) if an error occurred.
+ * @param {*} options 
+ * @param {*} callback 
+ */
+function ajaxCallWithOptions(options, callback) {
+    appLogMessage(url);
+    $.ajax(options).done(function (data) {
+        callback(data);
+    }).fail(function (jqXHR, message) {
+        callback(null,jqXHR.statusText + " : " + jqXHR.responseText);
+    });
+}
+
 
 function getHealthColor(health) {
     var COLOR_NORMAL = "#79DD1B";
