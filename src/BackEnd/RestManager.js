@@ -1,5 +1,6 @@
 var needle = require("needle");
 var minErrorCode = 400;
+const winston = require('winston');
 export default class RestManager {
     constructor(config) {
         this.config = config;
@@ -8,10 +9,21 @@ export default class RestManager {
             expires_in: 0,
             expires_at: new Date()
         };
+        this.logger = winston.createLogger({
+            level: config.loglevel || 'info',
+            format: winston.format.json(),
+            defaultMeta: { service: 'RestManager' },
+            transports: [
+              new winston.transports.File({ filename: 'error.log', level: 'error' }),
+              new winston.transports.File({ filename: 'combined.log' }),
+            ],
+          });
     }
     authorized() {
         var now = new Date();
-        return this.apiauth.access_token && this.apiauth.expires_at < now;
+        let is_authorized = this.apiauth.access_token && this.apiauth.expires_at < now;
+        this.logger.debug("Is Authorized", is_authorized);
+        return is_authorized;
     }
     post(endpoint,data) {
         var url = this.getControllerUrl() + endpoint;
@@ -22,7 +34,8 @@ export default class RestManager {
                 "Content-Type": 'application/vnd.appd.cntrl+protobuf;v=1'
             }
         };
-
+        this.logger.debug("POST URL", url);
+        this.logger.debug("POST Options", options);
         return needle('post', url, data, options);
     }
     get(endpoint) {
@@ -34,6 +47,8 @@ export default class RestManager {
                 "Content-Type": 'application/vnd.appd.cntrl+protobuf;v=1'
             }
         };
+        this.logger.debug("GET URL", url);
+        this.logger.debug("GET Options", options);
         return needle('get', url, options);
     }
     async restAPI(method, endpoint, data) {
@@ -57,6 +72,7 @@ export default class RestManager {
                 "Content-Type": 'application/vnd.appd.cntrl+protobuf;v=1'
             }
         };
+        t
 
         var postdata = {
             grant_type: 'client_credentials',
