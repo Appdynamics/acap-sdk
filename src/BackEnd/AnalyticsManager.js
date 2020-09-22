@@ -19,8 +19,8 @@ export default class AnalyticsManager {
             format: winston.format.json(),
             defaultMeta: { service: 'AnalyticsManager' },
             transports: [
-              new winston.transports.File({ filename: 'error.log', level: 'error' }),
-              new winston.transports.File({ filename: 'combined.log' }),
+              new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
+              new winston.transports.File({ filename: 'logs/combined.log' }),
             ],
           });
 
@@ -72,7 +72,7 @@ export default class AnalyticsManager {
        }
       
         var url = this.config.analyticsUrl + "/events/query?start=" + start + "&end=" + end + "&limit=" + limit;
-        AM.logger.debug("Analytics URL", url);
+        AM.logger.debug("Analytics URL", {url: url});
         var options = {
             method: 'POST',
             headers: {

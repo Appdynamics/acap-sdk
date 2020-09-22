@@ -14,15 +14,15 @@ export default class RestManager {
             format: winston.format.json(),
             defaultMeta: { service: 'RestManager' },
             transports: [
-              new winston.transports.File({ filename: 'error.log', level: 'error' }),
-              new winston.transports.File({ filename: 'combined.log' }),
+              new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
+              new winston.transports.File({ filename: 'logs/combined.log' }),
             ],
           });
     }
     authorized() {
         var now = new Date();
         let is_authorized = this.apiauth.access_token && this.apiauth.expires_at < now;
-        this.logger.debug("Is Authorized", is_authorized);
+        this.logger.debug("Is Authorized", {is_authorized: is_authorized});
         return is_authorized;
     }
     post(endpoint,data) {
@@ -83,10 +83,8 @@ export default class RestManager {
         const resp = await needle('post', url, postdata, options);
        
         if(resp.statusCode >= 300){
-            console.log("options:");
-            console.log(JSON.stringify(options));
-            console.log("post:");
-            console.log(JSON.stringify(postdata));
+            RM.logger.debug("options:", options);
+            RM.logger.debug("postdata:", postdata);
             
             throw "Error Fetching Token : Resp Code :"+resp.statusCode+" Message: "+resp.statusMessage;
         }
