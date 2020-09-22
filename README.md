@@ -1,5 +1,5 @@
 # acap-sdk
-SDK for Custom App Program Components
+SDK for Custom App Program Components. This is not an official AppDynamics Product.  As such, not support tickets can be created in the AppDynamics help desk.  Any issues should be logged in the issues page of this github project.
 
 ## Installation
 In your package.json add the following line to your list of dependencies
@@ -13,6 +13,7 @@ Include "node_modules/acap-sdk/dist/app.js" in your website.
 See ... to see documentation on examples.
 
 ## Version Updates
+Note: Commit your changes first. No need to push.
 Running 
 ```
 npm version patch -m "Upgrade to %s for reasons"

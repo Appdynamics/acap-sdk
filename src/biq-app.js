@@ -403,6 +403,42 @@ function makeGetCall(url, callback) {
     });
 }
 
+/**
+ * makes an ajax call and returns a callback passing results and any errors
+ * callback(results) if successfull
+ * callback(null,error) if an error occurred.
+ * @param {*} url 
+ * @param {*} callback 
+ */
+function ajaxCall(url, callback) {
+    appLogMessage(url);
+    $.ajax({
+        url: url,
+        method: "GET"
+    }).done(function (data) {
+        callback(data);
+    }).fail(function (jqXHR, message) {
+        callback(null,jqXHR.statusText + " : " + jqXHR.responseText);
+    });
+}
+
+/**
+ * makes an ajax call, allowing you to pass in options and returns a callback passing results and any errors
+ * options : javascript object e.g. {url: url,method: "GET"}
+ * callback(results) if successfull
+ * callback(null,error) if an error occurred.
+ * @param {*} options 
+ * @param {*} callback 
+ */
+function ajaxCallWithOptions(options, callback) {
+    appLogMessage(options);
+    $.ajax(options).done(function (data) {
+        callback(data);
+    }).fail(function (jqXHR, message) {
+        callback(null,jqXHR.statusText + " : " + jqXHR.responseText);
+    });
+}
+
 
 function getHealthColor(health) {
     var COLOR_NORMAL = "#79DD1B";
@@ -832,7 +868,7 @@ try {
 export { openAdql, search, searchRestUI, getSelectedTimeDescription, getTimeBucketFromDate, jsonDates, 
     getTimeRange, getTimeRangeStartingFromDate, getTimeRangeBasedOnSelection, applyTimeBasedOnSelection, 
     applyTimeForSelection, getTimeBucket, updateDateBasedOnSelection, getTimeBucketAsMinutes, stopAnim, 
-    startAnim, replaceNulls, postQuery, makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, 
+    startAnim, replaceNulls, postQuery, ajaxCall, ajaxCallWithOptions, makeGetCall, makePostCall, getHealthColor, lookup, lookupArray, 
     startDate, endDate, copyTextToClipBoard, roundValue, escapeQuery, shortTime, formatDateLong, formatDate, 
     getDateTimeRangeDescription, includeClauses, numberClause, stringClause, getTimeRangeText, autoCompleteOnFilter, 
     buildQueryForAutoCompleteOnFilter, autoComplete, autoCompleteArray, getGroupsFromDataSet,getGroupDataRecForDate,getGroupArrayJSON,getGroupArray,convertToGroupData,mergeDataSets  }
