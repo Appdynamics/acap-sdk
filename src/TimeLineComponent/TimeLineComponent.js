@@ -8,13 +8,12 @@ export default class TimeLineComponent extends BaseChart {
     }
   
     getRandomData(ordinal = false) {
-      const NGROUPS = 4,
-      MAXLINES = 5,
+      const MAXLINES = 5,
       MAXSEGMENTS = 5,
       MAXCATEGORIES = 5;
       var lastTwoWeeks = new Date(Date.now() - (24 * 60 * 60 * 1000 * 14));
       const MINTIME = lastTwoWeeks;
-    
+      var NGROUPS = 4;
       const nCategories = Math.ceil(Math.random()*MAXCATEGORIES),
       categoryLabels = ['Normal','Slow','Very Slow','Stall','Error'];
   
@@ -23,6 +22,8 @@ export default class TimeLineComponent extends BaseChart {
       var groupLabels = chartOptions.groupLabels;
       if(!groupLabels){
         groupLabels = [{app:"App1",bts:["BT1","BT2","BT3","BT4","BT5"]},{app:"App2",bts:["BT6","BT7","BT8","BT9","BT10"]},{app:"App3",bts:["BT11","BT12","BT13","BT14","BT15"]},{app:"App4",bts:["BT16","BT17","BT18","BT19","BT20"]}];
+      }else{
+        NGROUPS = groupLabels.length;
       }
   
       var nSegments = Math.ceil(Math.random()*MAXSEGMENTS);
