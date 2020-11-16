@@ -10,6 +10,7 @@ export default class BoxChartComponent extends BaseComponent {
         if (!options.cardStyle) {
             options.cardStyle = "card";
         }
+        //console.log("I am inside of the box chart component");
         super(options, new SparkLineChart(options));
     }
 
